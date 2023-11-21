@@ -30,19 +30,12 @@ namespace RPGProjektgrupp22
 
         private void printStartOfGame()
         {
-            Console.WriteLine("Välkommen till vårt spel!\nSpelaren kommer under spelets gång få olika alternativ att välja mellan.\n" +
-                "Exempel: \n" +
-                "1. Gå in i grottan\n" +
-                "2. Fortsätt längs stigen\n" +
-                "3. Gå tillbaks till lägret\n" +
-                "Valet bestämmer hur spelet fortsätter.");
-            string result = "Du befinner dig i lägret Kurast. Utanför lägrets murar befinner sig onda väsen som vill döda dig.\n\n" +
-                "I lägret finns det olika personer du kan prata med";
-            for(int i = 0; i < result.Length; i++)
-            {
-                Console.Write(result[i]);
-                Thread.Sleep(60);
-            }
+            Console.WriteLine("This is an rpg based game where you will face different challanges by exploring a collection of dungeons.\n" +
+                "You will choose one of the provided dungeons and explore it. If you survive you will have the opportunity to go back to town.\n" +
+                "In town you will be able to sell your loot and buy equipment and or consumables such as health potions.\n" +
+                "\nPress any key when ready: ");
+            Console.ReadKey();Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+               
         }
     }
 }
