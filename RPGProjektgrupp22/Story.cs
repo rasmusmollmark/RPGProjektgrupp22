@@ -9,9 +9,13 @@ namespace RPGProjektgrupp22
     public class Story
     {
         Player player;
+        List<Dungeon> dungeons = new List<Dungeon>();
         public Story() 
         {
-
+            for (int i = 0; i < 4; i++)
+            {
+                dungeons.Add(new Dungeon(i));
+            }
             player = new Player(getPlayerName());
             printStartOfGame();
             GivePlayerDungeonChoice();
@@ -20,7 +24,9 @@ namespace RPGProjektgrupp22
 
         private void GivePlayerDungeonChoice()
         {
+            Console.WriteLine("Pick the dungeon you wish to explore(1-4): ");
             
+
         }
 
         private string getPlayerName()
