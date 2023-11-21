@@ -8,15 +8,15 @@ namespace RPGProjektgrupp22
 {
     public class Inventory
     {
-        Equipable chestArmor;
-        Equipable weapon;
-        Equipable helmet;
-        Equipable shield;
-        Equipable boots;
-        Equipable gloves;
-        Equipable amulet;
-        Equipable ring1;
-        Equipable ring2;
+        public Equipable chestArmor;
+        public Equipable weapon;
+        public Equipable helmet;
+        public Equipable shield;
+        public Equipable boots;
+        public Equipable gloves;
+        public Equipable amulet;
+        public Equipable ring1;
+        public Equipable ring2;
         public Inventory() 
         {
             weapon = new StarterSword();

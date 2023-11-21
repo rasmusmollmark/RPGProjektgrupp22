@@ -11,9 +11,16 @@ namespace RPGProjektgrupp22
         Player player;
         public Story() 
         {
-            player = new Player();
+
+            player = new Player(getPlayerName());
             printStartOfGame();
 
+        }
+
+        private string getPlayerName()
+        {
+            Console.Write("Skriv in din spelares namn: ");
+            return Console.ReadLine();
         }
 
         private void printCurrentLocation(string location)

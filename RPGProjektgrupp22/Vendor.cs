@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace RPGProjektgrupp22
 {
-    public class StarterSword : StarterWeapon
+    public class Vendor
     {
-        public StarterSword() : base(1) 
-        {
-            
-        }
-        
+
     }
 }
