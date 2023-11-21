@@ -14,7 +14,13 @@ namespace RPGProjektgrupp22
 
             player = new Player(getPlayerName());
             printStartOfGame();
+            GivePlayerDungeonChoice();
 
+        }
+
+        private void GivePlayerDungeonChoice()
+        {
+            
         }
 
         private string getPlayerName()
