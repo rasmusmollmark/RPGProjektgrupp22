@@ -9,11 +9,11 @@ namespace RPGProjektgrupp22
     internal class Dungeon
     {
         private List<string> dungeonNameList = new List<string>() { "Ice Dungeon", "Fire Dungeon", "Noob Dungeon", "Water dungeon"};
-        private string dungeonName;
-        private static Random generator = new Random();
-        public Dungeon()
+        
+        
+        public Dungeon(int i)
         {
-            dungeonName = dungeonNameList[generator.Next(1, dungeonNameList.Count())];
+            Console.WriteLine("A dungeon named" + dungeonNameList[i] + " has been created");
         }   
     }
 }
