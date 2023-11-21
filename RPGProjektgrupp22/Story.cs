@@ -19,7 +19,7 @@ namespace RPGProjektgrupp22
 
         private string getPlayerName()
         {
-            Console.Write("Skriv in din spelares namn: ");
+            Console.Write("Please enter your characters name: ");
             return Console.ReadLine();
         }
 
