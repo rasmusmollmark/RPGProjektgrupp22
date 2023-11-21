@@ -8,6 +8,7 @@ namespace RPGProjektgrupp22
 {
     public class Player
     {
+        int hp = 10;
         private Inventory inventory;
         public Player()
         {
