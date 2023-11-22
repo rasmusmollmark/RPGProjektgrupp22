@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace RPGProjektgrupp22
 {
@@ -23,19 +24,77 @@ namespace RPGProjektgrupp22
         }
 
         private void beginStory()
-        { 
-            Console.Write(player.PrintInventory());
-            dungeons[GetPlayerDungeonChoice()].Explore(player);
+        {
+            ClearWindow();
+            Console.WriteLine(player.PrintInventory());
+            if (PlayerWantsToVisitTown())
+            {
+                GoToTown();
+            }
+            else
+            {
+                ExploreDungeon(GetPlayerDungeonChoice());
+            }
+            
+        }
+
+        private int GetUserInput()
+        {
+            if (int.TryParse(Console.ReadLine(), out int input))
+            {
+                return input;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        private void GoToTown()
+        {
+            ClearWindow();
+            Console.WriteLine("You're now in town.\n" +
+                "1. See inventory\n" +
+                "2. Go to vendors\n" +
+                "3. Explore dungeons");
+        }
+
+        private void ClearWindow()
+        {
+            Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        }
+
+        private bool PlayerWantsToVisitTown()
+        {
+            while (true)
+            {
+                Console.WriteLine("Do you want to visit town?\n" +
+                    "1: Yes\n" +
+                    "2. No, I want to explore");
+                int input = GetUserInput();
+                if (input < 3 && input > 0)
+                {
+                    switch (input)
+                    {
+                        case 1:
+                            return true;
+                        case 2:
+                            return false;
+                    }
+                }
+                Console.WriteLine("Wrong input!");
+            }
         }
 
         private int GetPlayerDungeonChoice()
         {
             while (true)
             {
-                Console.WriteLine("Pick the dungeon you wish to explore(1-4): ");
-                if (int.TryParse(Console.ReadLine(), out int choice) && choice > 0 && choice < 5)
+                Console.Write("Pick the dungeon you wish to explore (1-4): ");
+                int input = GetUserInput();
+                if (input > 0 && input < 5)
                 {
-                    return choice-1;
+                    return input-1;
                 }
                 Console.WriteLine("\nWrong input!");
             }
@@ -94,7 +153,7 @@ namespace RPGProjektgrupp22
                 "You will choose one of the provided dungeons and explore it. If you survive you will have the opportunity to go back to town.\n" +
                 "In town you will be able to sell your loot and buy equipment and or consumables such as health potions.\n" +
                 "\nPress any key when ready: ");
-            Console.ReadKey();Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            Console.ReadKey();
                
         }
     }

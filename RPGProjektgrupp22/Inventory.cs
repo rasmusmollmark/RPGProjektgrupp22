@@ -8,7 +8,8 @@ namespace RPGProjektgrupp22
 {
     public class Inventory
     {
-        private List<Equipable> inventoryList = new List<Equipable>();
+        private List<Equipable> EquipableList = new List<Equipable>();
+        private List<Consumable> consumablesList = new List<Consumable>();
         public bool hasChestArmor = false;
         public bool hasWeapon = false;
         public bool hasHelmet = false;
@@ -20,19 +21,29 @@ namespace RPGProjektgrupp22
         public bool hasRing2 = false;
         public Inventory() 
         {
-            inventoryList.Add(new StarterSword());
-            inventoryList.Add(new StarterShield());
+            EquipableList.Add(new StarterSword());
+            EquipableList.Add(new StarterShield());
             hasShield = true;
             hasWeapon = true;
+            for(int i = 0; i < 4; i++)
+            {
+                consumablesList.Add(new MinorHealingPotion());
+            }
         }
 
 
         public string InventoryToString()
         {
             string result = "";
-            foreach(Equipable item in inventoryList)
+            result += "Equipment: \n";
+            foreach(Equipable item in EquipableList)
             {
                result += item.EquipableToString()+"\n";
+            }
+            result += "\nConsumables: \n";
+            foreach(Consumable consumable in consumablesList)
+            {
+                result += consumable.ConsumableToString() + "\n";
             }
             return result;
         }
