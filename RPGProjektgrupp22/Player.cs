@@ -8,10 +8,6 @@ namespace RPGProjektgrupp22
 {
     public class Player : Character
     {
-        public int health { get; set; }
-        public int damage { get; set;}
-        public string name { get; set; }
-        public bool isDead { get; set; }
 
         private int levelsCompletedThisStage = 0;
         private int levelsCompletedTotal = 0;
@@ -19,12 +15,9 @@ namespace RPGProjektgrupp22
         private Inventory inventory;
 
 
-        public Player(string name)
+        public Player(string name) : base(name, 50, 1)
         {
-            this.name = name;
             inventory = new Inventory();
-            damage = 1;
-            isDead = false;
         }
 
         public void LevelCompleted()
@@ -37,21 +30,11 @@ namespace RPGProjektgrupp22
 
         public int GetLevelsCompleted() => levelsCompletedThisStage;
         
-
-        public string GetName() => name;
-
-
         public void ResetLevelsCompleted() => levelsCompletedThisStage = 0;
 
         public string PrintInventory() => inventory.InventoryToString();
 
-        public void takeDamage(int damage)
-        {
-            health -= damage;
-            if(health < 0)
-            {
-
-            }
-        }
+        
     }
+    
 }

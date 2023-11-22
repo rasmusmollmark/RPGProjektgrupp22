@@ -6,14 +6,36 @@ using System.Threading.Tasks;
 
 namespace RPGProjektgrupp22
 {
-    public interface Character
+    public abstract class Character
     {
-        int health{ get; set; }
-        string name { get; set; }
-        int damage {  get; set; }
-        bool isDead {  get; set; }
+        protected int health;
+        protected string name;
+        protected int damage;
+        protected bool isDead = false;
+        public Character(string name, int health, int damage)
+        {
+            this.name = name;
+            this.health = health;
+            this.damage = damage;
+        }
 
-        public void takeDamage(int damage);
+        public bool IsDead => isDead;
+
+        public string GetName() => name;
+
+        public void TakeDamage(int damage)
+        {
+            health -= damage;
+            if (health < 0)
+            {
+                isDead = true;
+            }
+        }
+
+        public void AttackCharacter(Character character)
+        {
+            character.TakeDamage(damage);
+        }
 
     }
 }
