@@ -8,7 +8,7 @@ namespace RPGProjektgrupp22
 {
     public class StarterWeapon : Weapon
     {
-        public StarterWeapon(int damageModifier) : base(damageModifier, 1) 
+        public StarterWeapon(int damageModifier, string type) : base(damageModifier, 1, type) 
         {
             
         }

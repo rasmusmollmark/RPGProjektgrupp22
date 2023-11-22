@@ -18,15 +18,27 @@ namespace RPGProjektgrupp22
             }
             player = new Player(getPlayerName());
             printStartOfGame();
-            GivePlayerDungeonChoice();
+            beginStory();
 
         }
 
-        private void GivePlayerDungeonChoice()
+        private void beginStory()
         {
-            Console.WriteLine("Pick the dungeon you wish to explore(1-4): ");
-            
+            Console.Write(player.PrintInventory());
+            dungeons[GetPlayerDungeonChoice()].Explore(player);
+        }
 
+        private int GetPlayerDungeonChoice()
+        {
+            while (true)
+            {
+                Console.WriteLine("Pick the dungeon you wish to explore(1-4): ");
+                if (int.TryParse(Console.ReadLine(), out int choice) && choice > 0 && choice < 5)
+                {
+                    return choice;
+                }
+                Console.WriteLine("\nWrong input!");
+            }
         }
 
         private string getPlayerName()

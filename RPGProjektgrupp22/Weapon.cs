@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace RPGProjektgrupp22
 {
-    public abstract class Weapon : Equipable
+    public class Weapon : Equipable
     {
         protected int damageModifier;
-        public Weapon(int damageModifier, int sellValue) : base(sellValue)
+        
+        public Weapon(int damageModifier, int sellValue, string type) : base(sellValue, type)
         {
            this.damageModifier = damageModifier;
         }
 
+        public override string EquipableToString() => type + " Damage: " + damageModifier;
+        
     }
 }

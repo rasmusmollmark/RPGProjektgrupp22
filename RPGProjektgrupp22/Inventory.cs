@@ -8,19 +8,33 @@ namespace RPGProjektgrupp22
 {
     public class Inventory
     {
-        public Equipable chestArmor;
-        public Equipable weapon;
-        public Equipable helmet;
-        public Equipable shield;
-        public Equipable boots;
-        public Equipable gloves;
-        public Equipable amulet;
-        public Equipable ring1;
-        public Equipable ring2;
+        private List<Equipable> inventoryList = new List<Equipable>();
+        public bool hasChestArmor = false;
+        public bool hasWeapon = false;
+        public bool hasHelmet = false;
+        public bool hasShield = false;
+        public bool hasBoots = false;
+        public bool HasGloves = false;
+        public bool hasAmulet = false;
+        public bool hasRing1 = false;
+        public bool hasRing2 = false;
         public Inventory() 
         {
-            weapon = new StarterSword();
-            shield = new StarterShield();
+            inventoryList.Add(new StarterSword());
+            inventoryList.Add(new StarterShield());
+            hasShield = true;
+            hasWeapon = true;
+        }
+
+
+        public string InventoryToString()
+        {
+            string result = "";
+            foreach(Equipable item in inventoryList)
+            {
+               result += item.EquipableToString()+"\n";
+            }
+            return result;
         }
     }
 }

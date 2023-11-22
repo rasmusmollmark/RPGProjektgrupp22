@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace RPGProjektgrupp22
 {
-    public abstract class Shield : Equipable
+    public class Shield : Equipable
     {
         protected int defense;
         protected int blockChance;
-        public Shield(int defense, int blockChance, int sellValue) : base(sellValue)
+        public Shield(int defense, int blockChance, int sellValue) : base(sellValue, "Shield")
         {
             this.defense = defense;
             this.blockChance = blockChance;
         }
+
+        public override string EquipableToString() => type + " Defense: " + defense + " Blockchance: "+ blockChance;
     }
 }

@@ -11,7 +11,8 @@ namespace RPGProjektgrupp22
         private int health = 20;
         private int baseDamage = 1;
         private string name;
-        private int levelsCompleted = 0;
+        private int levelsCompletedThisStage = 0;
+        private int levelsCompletedTotal = 0;
 
         private Inventory inventory;
         public Player(string name)
@@ -22,12 +23,21 @@ namespace RPGProjektgrupp22
 
         public void LevelCompleted()
         {
-            levelsCompleted++;
+            levelsCompletedThisStage++;
+            levelsCompletedTotal++;
             baseDamage++;
             health += 2;
         }
-        public int GetLevelsCompleted() { return levelsCompleted; }
-        public string GetName() { return name; }
-        public void ResetLevelsCompleted() { levelsCompleted = 0; }
+
+        public int GetLevelsCompleted() => levelsCompletedThisStage;
+        
+
+        public string GetName() => name;
+
+
+        public void ResetLevelsCompleted() => levelsCompletedThisStage = 0;
+
+        public string PrintInventory() => inventory.InventoryToString();
+        
     }
 }

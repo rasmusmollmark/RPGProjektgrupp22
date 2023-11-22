@@ -11,11 +11,13 @@ namespace RPGProjektgrupp22
         private List<string> dungeonNameList = new List<string>() { "Ice Dungeon", "Fire Dungeon", "Noob Dungeon", "Water dungeon"};
         private Random rnd = new Random();
         private int dungeonsCleared = 0;
+        private string nameOfDungeon = "";
         public Dungeon(int i)
         {
             Console.WriteLine("A dungeon named" + dungeonNameList[i] + " has been created");
+            nameOfDungeon = dungeonNameList[i];
         } 
-        public void Explore()
+        public void Explore(Player player)
         {
             int randomOutcome = rnd.Next(1, 10);
 
