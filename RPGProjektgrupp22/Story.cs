@@ -24,9 +24,40 @@ namespace RPGProjektgrupp22
 
         private void GivePlayerDungeonChoice()
         {
-            Console.WriteLine("Pick the dungeon you wish to explore(1-4): ");
-            
+            Console.WriteLine("Pick the dungeon you wish to explore (1-4): ");
+            int chosenDungeon;
 
+            do
+            {
+                // Get the player's choice
+                string input = Console.ReadLine();
+
+                
+                if (int.TryParse(input, out chosenDungeon))
+                {
+                    // Check if the chosen number is within the valid range
+                    if (chosenDungeon >= 1 && chosenDungeon <= 4)
+                    {
+                        // The input is valid, break out of the loop
+                        break;
+                    }
+                }
+
+                // If the input is invalid, ask the player to enter a valid number
+                Console.WriteLine("Invalid input. Please enter a number between 1 and 4.");
+            } while (true);
+
+            // The player has chosen a valid dungeon, proceed with that dungeon
+            ExploreDungeon(chosenDungeon - 1);
+        }
+        private void ExploreDungeon(int dungeonIndex)
+        {
+            Dungeon selectedDungeon = dungeons[dungeonIndex];
+
+            // Display the name of the selected dungeon
+            Console.WriteLine($"You have chosen to explore " + selectedDungeon.GetDungeonName());
+
+            // Implement logic for exploring the selected dungeon
         }
 
         private string getPlayerName()
