@@ -74,7 +74,7 @@ namespace RPGProjektgrupp22
             Console.WriteLine($"You have chosen to explore " + selectedDungeon.GetDungeonName());
 
             // Implement logic for exploring the selected dungeon
->>>>>>> 80355e8f8edf2019d70480de071dc965b156df79
+
         }
 
         private string getPlayerName()
