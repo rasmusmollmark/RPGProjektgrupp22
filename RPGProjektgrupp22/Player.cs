@@ -26,5 +26,8 @@ namespace RPGProjektgrupp22
             baseDamage++;
             health += 2;
         }
+        public int GetLevelsCompleted() { return levelsCompleted; }
+        public string GetName() { return name; }
+        public void ResetLevelsCompleted() { levelsCompleted = 0; }
     }
 }
