@@ -11,9 +11,9 @@ namespace RPGProjektgrupp22
         private List<string> dungeonNameList = new List<string>() { "Ice Dungeon", "Fire Dungeon", "Noob Dungeon", "Water dungeon"};
         private Random rnd = new Random();
         private int dungeonsCleared = 0;
-        private string nameOfDungeon = "";
         public Dungeon(int i)
         {
+            dungeonIndex = i;
             Console.WriteLine("A dungeon named" + dungeonNameList[i] + " has been created");
             nameOfDungeon = dungeonNameList[i];
         } 
@@ -30,6 +30,13 @@ namespace RPGProjektgrupp22
             {
                 Console.WriteLine("You found a chest!");
             }
+
+
+        }
+
+        public string GetDungeonName()
+        {
+            return dungeonNameList[dungeonIndex];
         }
 
         private void EncounterEnemy()
