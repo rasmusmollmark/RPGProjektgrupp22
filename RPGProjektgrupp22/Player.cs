@@ -6,26 +6,32 @@ using System.Threading.Tasks;
 
 namespace RPGProjektgrupp22
 {
-    public class Player
+    public class Player : Character
     {
-        private int health = 20;
-        private int baseDamage = 1;
-        private string name;
+        public int health { get; set; }
+        public int damage { get; set;}
+        public string name { get; set; }
+        public bool isDead { get; set; }
+
         private int levelsCompletedThisStage = 0;
         private int levelsCompletedTotal = 0;
 
         private Inventory inventory;
+
+
         public Player(string name)
         {
             this.name = name;
             inventory = new Inventory();
+            damage = 1;
+            isDead = false;
         }
 
         public void LevelCompleted()
         {
             levelsCompletedThisStage++;
             levelsCompletedTotal++;
-            baseDamage++;
+            damage++;
             health += 2;
         }
 
@@ -38,6 +44,14 @@ namespace RPGProjektgrupp22
         public void ResetLevelsCompleted() => levelsCompletedThisStage = 0;
 
         public string PrintInventory() => inventory.InventoryToString();
-        
+
+        public void takeDamage(int damage)
+        {
+            health -= damage;
+            if(health < 0)
+            {
+
+            }
+        }
     }
 }

@@ -35,7 +35,7 @@ namespace RPGProjektgrupp22
                 Console.WriteLine("Pick the dungeon you wish to explore(1-4): ");
                 if (int.TryParse(Console.ReadLine(), out int choice) && choice > 0 && choice < 5)
                 {
-                    return choice;
+                    return choice-1;
                 }
                 Console.WriteLine("\nWrong input!");
             }
