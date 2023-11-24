@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,7 +35,7 @@ namespace RPGProjektgrupp22
             if (randomOutcome < 6) 
             {
                 Console.WriteLine("You encounter an enemy");
-                EncounterEnemy();
+                EncounterEnemy(player);
                 //Console.WriteLine("You are in the" + dungeonNameList[dungeonIndex]);
             }
 
@@ -49,17 +51,16 @@ namespace RPGProjektgrupp22
 
         }
 
-        public string GetDungeonName()
-        {
-            return dungeonNameList[dungeonIndex];
-        }
+        public string GetDungeonName() => dungeonNameList[dungeonIndex];
 
-        private void EncounterEnemy()
+
+        private void EncounterEnemy(Player player)
         {
             Console.WriteLine("You have encountered an enemy!");
-            Console.WriteLine("You fought fiercely and succeded!");
-            Console.WriteLine("Press any key to continue");
-            Console.ReadKey();
+            Enemy enemy = Enemy.GetRandomEnemy();
+            Fight fight = new Fight(enemy, this);
+            fight.Start(player);
+
 
 
         }
@@ -80,6 +81,8 @@ namespace RPGProjektgrupp22
             // Återställ räknaren för klarade dungeons för nästa omgång
             player.ResetLevelsCompleted();
         }
+
+
 
     }
 }
