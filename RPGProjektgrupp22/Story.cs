@@ -11,6 +11,8 @@ namespace RPGProjektgrupp22
     {
         Player player;
         List<Dungeon> dungeons = new List<Dungeon>();
+        bool haveSpokenWithAkara = false;
+        bool haveSpokenWithCharsi = false;
         public Story() 
         {
             for (int i = 0; i < 4; i++)
@@ -66,28 +68,82 @@ namespace RPGProjektgrupp22
 
         private void GoToTown()
         {
-            ClearWindow();
-            Console.WriteLine("You're now in town.\n" +
-                "1. See inventory\n" +
-                "2. Go to vendors\n" +
-                "3. Explore dungeons");
-            int input = GetUserInput();
-            while (input < 1 || input > 3)
+            while (true)
             {
-                Console.WriteLine("Invalid inputer. Enter a number between 1 and 3");
-                input = GetUserInput();
+                ClearWindow();
+                Console.WriteLine("You're now in town.\n" +
+                    "1. See inventory\n" +
+                    "2. Go to vendors\n" +
+                    "3. Explore dungeons");
+                int input = GetUserInput();
+                switch (input)
+                {
+                    case 1:
+                        Console.WriteLine(player.PrintInventory());
+                        break;
+                    case 2:
+                        Console.WriteLine("Going to vendors");
+                        MeetVendors();
+                        break;
+                    case 3:
+                        ContinueStory();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid input. Enter a number between 1 and 3");
+                        break;
+                }
             }
-            switch (input)
+        }
+
+        private void MeetVendors()
+        {
+            Vendor vendor = AskWhichVendorToMeet();
+            if(vendor == null)
             {
-                case 1:
-                    Console.WriteLine(player.PrintInventory());
-                    break;
-                case 2:
-                    Console.WriteLine("Going to vendors");
-                    break;
-                case 3:
-                    ContinueStory();
-                    break;
+                return;
+            }
+            vendor.GreetPlayer();
+            while (true)
+            {
+                vendor.OptionForPlayerMeeting();
+                int input = GetUserInput();
+                switch (input)
+                {
+                    case 1:
+                        vendor.SellItems(player);
+                        break;
+                    case 2:
+                        vendor.BuyItems(player);
+                        break;
+                    case 3: 
+                        vendor.TellGossip();
+                        break;
+                }
+            }
+        }
+
+        private Vendor AskWhichVendorToMeet()
+        {
+            while(true)
+            {
+                Console.WriteLine("Which vendor do you want to see?\n" +
+                    "1. Akara\n" +
+                    "2. Charsi\n" +
+                    "3. Back to dungeons!");
+                int input = GetUserInput();
+                if (input < 4 && input > 0)
+                {
+                    switch (input)
+                    {
+                        case 1:
+                            return new Akara();
+                        case 2:
+                            return new Charsi();
+                        case 3: return null;
+                    }
+                }
+                Console.WriteLine("Wrong input!");
+
             }
         }
 
@@ -160,6 +216,7 @@ namespace RPGProjektgrupp22
                 "You will choose one of the provided dungeons and explore it. If you survive you will have the opportunity to go back to town.\n" +
                 "In town you will be able to sell your loot and buy equipment and or consumables such as health potions.\n" +
                 "\nPress any key when ready: ");
+            
             Console.ReadKey();
                
         }

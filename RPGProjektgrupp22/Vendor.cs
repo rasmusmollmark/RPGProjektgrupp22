@@ -6,8 +6,30 @@ using System.Threading.Tasks;
 
 namespace RPGProjektgrupp22
 {
-    public class Vendor
+    public interface Vendor
     {
+        string Name { get; }
+
+
+        public void AddLore();
+
+        public void GenerateInventory();
+
+        public void TellGossip();
+
+        public void TellWelcome();
+
+        public void GreetPlayer();
+
+        public void OptionForPlayerMeeting();
+
+        public void SellItems(Player player);
+
+        public void BuyItems(Player player);
+
+
+
+
 
     }
 }

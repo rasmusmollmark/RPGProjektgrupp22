@@ -32,7 +32,7 @@ namespace RPGProjektgrupp22
                 Console.WriteLine("This dungeon has already been explored");
                 return false;
             }
-            if (randomOutcome < 6) 
+            else if (randomOutcome < 6) 
             {
                 Console.WriteLine("You encounter an enemy");
                 EncounterEnemy(player);
