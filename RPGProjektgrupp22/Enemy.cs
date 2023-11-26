@@ -18,7 +18,7 @@ namespace RPGProjektgrupp22
             enemies.Add(new Enemy("Orc", 80, 15, 10, 15, 15, 30, 15));
             enemies.Add(new Enemy("Ogre", 120, 20, 15, 20, 5, 50, 20));
         }
-        public Enemy(string name, int health, int damage, int expGiven, int goldGiven, int strenght, int defense, int speed) : base(name, health, damage,strenght,defense,speed) // En konstruktor som tar samma parametrar som Character klassen plus expGiven och goldGiven
+        public Enemy(string name, int health, int damage, int expGiven, int goldGiven, int strenght, int defense, int speed) : base(name, health, strenght,defense,damage, speed) // En konstruktor som tar samma parametrar som Character klassen plus expGiven och goldGiven
         {
             this.expGiven = expGiven; // Tilldela expGiven till fältet
             this.goldGiven = goldGiven; // Tilldela goldGiven till fältet
@@ -30,7 +30,7 @@ namespace RPGProjektgrupp22
 
         public override void TakeDamage(int damage) // En metod som överlagrar TakeDamage metoden från Character klassen
         {
-            base.TakeDamage(damage); // Anropa bas klassens TakeDamage metod
+            TakeDamage(damage); // Anropa bas klassens TakeDamage metod
             Console.WriteLine(name + " took " + damage + " damage!"); // Skriv ut ett meddelande om att fienden tog skada
         }
         public static Enemy GetRandomEnemy()

@@ -15,7 +15,7 @@ namespace RPGProjektgrupp22
         private Inventory inventory;
 
 
-        public Player(string name) : base(name, 50, 1)
+        public Player(string name) : base(name, 100, 20, 20, 15, 10)
         {
             inventory = new Inventory();
         }

@@ -23,14 +23,14 @@ namespace RPGProjektgrupp22
             this.health = health;
             this.damage = damage;
         }
-        public Character(string name, int maxHealth, int strength, int defense, int agility, int speed)
+        public Character(string name, int maxHealth, int strength, int defense, int damage, int speed)
         {
             this.name = name;
             this.maxHealth = maxHealth;
             this.health = maxHealth; // Sätt hälsan till maximal hälsa
             this.strength = strength;
             this.defense = defense;
-            this.agility = agility;
+            this.damage = damage;
             this.speed = speed;
         }
 

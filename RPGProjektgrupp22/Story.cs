@@ -19,35 +19,35 @@ namespace RPGProjektgrupp22
             }
             player = new Player(getPlayerName());
             printStartOfGame();
-            beginStory();
+            ContinueStory();
 
         }
 
-        private void beginStory()
+        private void ContinueStory()
         {
-            ClearWindow();
-            Console.WriteLine(player.PrintInventory());
-
-            if (PlayerWantsToVisitTown())
+            while (true)
             {
-                GoToTown();
-            }
-            else
-            {
-                int dungeonChoice;
+                ClearWindow();
+                Console.WriteLine(player.PrintInventory());
 
-                do
+                if (PlayerWantsToVisitTown())
                 {
-                    dungeonChoice = GetPlayerDungeonChoice();
-                    bool goBackToTown = dungeons[dungeonChoice].Explore(player);
-
-                    if (goBackToTown)
+                    GoToTown();
+                }
+                else
+                {
+                    while (true)
                     {
-                        GoToTown();
-                        return; 
-                    }
+                        int dungeonChoice = GetPlayerDungeonChoice();
+                        bool dungeonCompleted = dungeons[dungeonChoice].Explore(player);
 
-                } while (true);
+                        if (dungeonCompleted)
+                        {
+                            GoToTown();
+                            return;
+                        }
+                    }
+                }
             }
 
         }
@@ -83,10 +83,10 @@ namespace RPGProjektgrupp22
                     Console.WriteLine(player.PrintInventory());
                     break;
                 case 2:
-                    Console.WriteLine("Gping to vendors");
+                    Console.WriteLine("Going to vendors");
                     break;
                 case 3:
-                    beginStory();
+                    ContinueStory();
                     break;
             }
         }
