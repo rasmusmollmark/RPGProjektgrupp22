@@ -27,15 +27,29 @@ namespace RPGProjektgrupp22
         {
             ClearWindow();
             Console.WriteLine(player.PrintInventory());
+
             if (PlayerWantsToVisitTown())
             {
                 GoToTown();
             }
             else
             {
-                ExploreDungeon(GetPlayerDungeonChoice());
+                int dungeonChoice;
+
+                do
+                {
+                    dungeonChoice = GetPlayerDungeonChoice();
+                    bool goBackToTown = dungeons[dungeonChoice].Explore(player);
+
+                    if (goBackToTown)
+                    {
+                        GoToTown();
+                        return; 
+                    }
+
+                } while (true);
             }
-            
+
         }
 
         private int GetUserInput()
@@ -57,6 +71,24 @@ namespace RPGProjektgrupp22
                 "1. See inventory\n" +
                 "2. Go to vendors\n" +
                 "3. Explore dungeons");
+            int input = GetUserInput();
+            while (input < 1 || input > 3)
+            {
+                Console.WriteLine("Invalid inputer. Enter a number between 1 and 3");
+                input = GetUserInput();
+            }
+            switch (input)
+            {
+                case 1:
+                    Console.WriteLine(player.PrintInventory());
+                    break;
+                case 2:
+                    Console.WriteLine("Gping to vendors");
+                    break;
+                case 3:
+                    beginStory();
+                    break;
+            }
         }
 
         private void ClearWindow()
@@ -106,8 +138,8 @@ namespace RPGProjektgrupp22
 
             // Display the name of the selected dungeon
             Console.WriteLine($"You have chosen to explore " + selectedDungeon.GetDungeonName());
-
-            // Implement logic for exploring the selected dungeon
+            selectedDungeon.Explore(player);
+            
 
         }
 
