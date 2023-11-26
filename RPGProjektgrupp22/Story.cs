@@ -99,31 +99,6 @@ namespace RPGProjektgrupp22
                 Console.WriteLine("\nWrong input!");
             }
 
-            Console.WriteLine("Pick the dungeon you wish to explore (1-4): ");
-            int chosenDungeon;
-
-            do
-            {
-                // Get the player's choice
-                string input = Console.ReadLine();
-
-                
-                if (int.TryParse(input, out chosenDungeon))
-                {
-                    // Check if the chosen number is within the valid range
-                    if (chosenDungeon >= 1 && chosenDungeon <= 4)
-                    {
-                        // The input is valid, break out of the loop
-                        break;
-                    }
-                }
-
-                // If the input is invalid, ask the player to enter a valid number
-                Console.WriteLine("Invalid input. Please enter a number between 1 and 4.");
-            } while (true);
-
-            // The player has chosen a valid dungeon, proceed with that dungeon
-            ExploreDungeon(chosenDungeon - 1);
         }
         private void ExploreDungeon(int dungeonIndex)
         {
