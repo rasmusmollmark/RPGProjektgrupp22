@@ -67,6 +67,7 @@ namespace RPGProjektgrupp22
                 isDead = true; // Sätt isDead till true
             }
         }
+        
 
         public void AttackCharacter(Character character) // En metod som attackerar en annan karaktär
         {
