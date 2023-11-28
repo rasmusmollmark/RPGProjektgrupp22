@@ -32,13 +32,15 @@ namespace RPGProjektgrupp22
         }
 
 
+        public void AddItemToInventory(Equipable item) => EquipableList.Add(item);
+
         public string InventoryToString()
         {
             string result = "";
             result += "Equipment: \n";
             foreach(Equipable item in EquipableList)
             {
-               result += item.EquipableToString()+"\n";
+               result += item.EquipableToString()+ "Equipped: "+ item.isEquipped() +"\n";
             }
             result += "\nConsumables: \n";
             foreach(Consumable consumable in consumablesList)

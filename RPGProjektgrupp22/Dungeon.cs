@@ -42,7 +42,7 @@ namespace RPGProjektgrupp22
             else
             {
                 
-                FindChest();
+                FindChest(player);
                 //Console.WriteLine("You are in the" + dungeonNameList[dungeonIndex]);
             }
             explored = true;
@@ -65,14 +65,13 @@ namespace RPGProjektgrupp22
 
         }
 
-        private void FindChest()
+        private void FindChest(Player player)
         {
-            Console.WriteLine("You found a chest with items!");
+            Loot loot = new ChestLoot();
+            Console.WriteLine("You found a chest containing "+ loot.Gold +"!");
+            player.RecieveLoot(loot);
             Console.WriteLine("Press any key to continue");
             Console.ReadKey();
-
-
-
         }
         private void GoToNextStage(Player player)
         {

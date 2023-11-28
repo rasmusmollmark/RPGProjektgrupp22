@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace RPGProjektgrupp22
 {
-    public interface Loot
+    public class ShortSword : Weapon
     {
-        public int Gold { get; }
-        public Equipable Item { get; }
+        public ShortSword() : base(new Random().Next(1, 4) + 1, new Random().Next(1, 6) + 10, "Short Sword")
+        { }
     }
 }

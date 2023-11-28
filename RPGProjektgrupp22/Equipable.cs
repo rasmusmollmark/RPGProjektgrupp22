@@ -10,13 +10,18 @@ namespace RPGProjektgrupp22
     {
         protected int sellValue;
         protected string type;
+        protected int buyValue;
+        private bool equipped = false;
         public Equipable(int sellValue, string type)
         {
             this.sellValue = sellValue;
             this.type = type;
+            buyValue = 3 * sellValue;
         }
 
         public abstract string EquipableToString();
+
+        public bool isEquipped() => equipped;
         
     }
 }

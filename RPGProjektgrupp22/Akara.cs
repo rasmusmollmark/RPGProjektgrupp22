@@ -10,6 +10,7 @@ namespace RPGProjektgrupp22
     {
         private string name = "Akara";
         private List<string> Lore = new List<string>();
+        private VendorInventory inventory;
         private string[] differentTypesOfGreetings = new string[] {"Good day.",
 "Good evening.",
 "Good morning.",
@@ -20,18 +21,18 @@ namespace RPGProjektgrupp22
 "Yes?"};
         public string Name => name;
 
-        private VendorInventory inventory;
+        public VendorInventory Inventory => inventory;
+
+        
 
         public Akara() 
         {
-            GenerateShop();
+            GenerateInventory();
             AddLore();
         }
 
-        private void GenerateShop()
-        {
-            inventory = new VendorInventory(new Random().Next(4, 7));
-        }
+        
+            
 
         public string InventoryToString() => inventory.InventoryToString();
 
@@ -45,8 +46,9 @@ namespace RPGProjektgrupp22
                 {
                     break;
                 }
-                Console.ReadKey();
             }
+            Console.ReadKey();
+            Console.WriteLine();
         }
         public void TellWelcome()
         {
@@ -60,6 +62,7 @@ namespace RPGProjektgrupp22
                 }
             }
             Console.ReadKey();
+            Console.WriteLine();
         }
 
         public void AddLore()
@@ -84,15 +87,16 @@ namespace RPGProjektgrupp22
 
         public void GenerateInventory()
         {
-            
+            inventory = new VendorInventory(new Random().Next(4, 7));
         }
 
         public void OptionForPlayerMeeting()
         {
             Console.WriteLine("1. Sell items\n" +
             "2. Buy items\n" +
-            "3. Hear stories");
-            
+            "3. Hear stories\n" +
+            "4. Back to town");
+
         }
 
         public void GreetPlayer()

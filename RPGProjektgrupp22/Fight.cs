@@ -103,6 +103,7 @@ namespace RPGProjektgrupp22
             {
                 Console.WriteLine("You have defeated the " + enemy.GetName() + "!"); // Print a message about the win
                 Console.WriteLine("You gain " + enemy.GetExpGiven() + " experience and " + enemy.GetGoldGiven() + " gold!"); // Print the rewards
+                player.RecieveLoot(new EnemyLootDrop(enemy.GetGoldGiven()), enemy.GetExpGiven());
                 //player.SetExp(player.GetExp() + enemy.GetExpGiven()); // Update the player's experience
                 //player.SetGold(player.GetGold() + enemy.GetGoldGiven()); // Update the player's gold
                 Console.WriteLine("Press any key to continue");

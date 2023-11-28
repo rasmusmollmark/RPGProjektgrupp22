@@ -9,7 +9,7 @@ namespace RPGProjektgrupp22
     public interface Vendor
     {
         string Name { get; }
-
+        VendorInventory Inventory { get; }
         public string InventoryToString();
 
 

@@ -11,6 +11,7 @@ namespace RPGProjektgrupp22
     {
         private string name = "Charsi";
         private List<string> Lore = new List<string>();
+        private VendorInventory inventory;
         private string[] differentTypesOfGreetings = new string[]{"Farewell.",
 "Goodbye.",
 "Good day.",
@@ -24,6 +25,8 @@ namespace RPGProjektgrupp22
 "What can I do for you?",
 "What'cha need?"};
         public string Name => name;
+
+        public VendorInventory Inventory => inventory;
 
         public Charsi()
         {
@@ -47,6 +50,7 @@ namespace RPGProjektgrupp22
 
         public void GenerateInventory()
         {
+            inventory = new VendorInventory();
         }
 
         public void TellGossip()
@@ -61,6 +65,7 @@ namespace RPGProjektgrupp22
                 }
             }
             Console.ReadKey();
+            Console.WriteLine();
         }
 
         public void GreetPlayer()
@@ -73,7 +78,8 @@ namespace RPGProjektgrupp22
         {
             Console.WriteLine("1. Sell items\n" +
             "2. Buy items\n" +
-            "3. Hear stories");
+            "3. Hear stories\n" +
+            "4. Back to town");
         }
 
         public void SellItems(Player player)
@@ -83,7 +89,7 @@ namespace RPGProjektgrupp22
 
         public void BuyItems(Player player)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void TellWelcome()
@@ -98,11 +104,10 @@ namespace RPGProjektgrupp22
                 }
             }
             Console.ReadKey();
+            Console.WriteLine();
         }
 
-        public string InventoryToString()
-        {
-            throw new NotImplementedException();
-        }
+        public string InventoryToString() => inventory.InventoryToString();
+            
     }
 }

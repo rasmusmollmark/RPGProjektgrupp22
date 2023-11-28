@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace RPGProjektgrupp22
 {
-    public interface Loot
+    public class LeatherCap : Helmet
     {
-        public int Gold { get; }
-        public Equipable Item { get; }
+        public LeatherCap() : base(new Random().Next(1, 7), "Leather Cap")
+        {
+        }
     }
 }

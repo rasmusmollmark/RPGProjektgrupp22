@@ -6,16 +6,14 @@ using System.Threading.Tasks;
 
 namespace RPGProjektgrupp22
 {
-    public class ChestArmor : Equipable
+    public class Helmet : Equipable
     {
         private int defense;
-
-        public ChestArmor(string type, int defense) : base(defense/4, type)
+        public Helmet(int defense, string type) : base(defense/4, type)
         {
             this.defense = defense;
         }
 
         public override string EquipableToString() => type + " Defense: " + defense;
-        
     }
 }

@@ -13,9 +13,13 @@ namespace RPGProjektgrupp22
         
         public VendorInventory(int amountOfHealingPotions)
         {
+            createAkaraInventory(amountOfHealingPotions);
+        }
+        private void createAkaraInventory(int amountOfHealingPotions)
+        {
             for (int i = 0; i < amountOfHealingPotions; i++)
             {
-                switch(new Random().Next(1, 3)) 
+                switch (new Random().Next(1, 3))
                 {
                     case 1:
                         consumables.Add(new MinorHealingPotion());
@@ -25,19 +29,32 @@ namespace RPGProjektgrupp22
                         break;
                 }
             }
+        
         }
 
         public VendorInventory() 
-        { 
+        {
+            createCharsiInventory();
+        }
 
+        private void createCharsiInventory()
+        {
+            for(int i = 0; i < 4; i++)
+            {
+                equipables.Add(RandomizeEquippable.GetRandom());
+            }
         }
 
         public string InventoryToString()
         {
-            string result = "";
+            string result = "\n\n\nAvailable items:\n";
             for(int i  = 0; i < consumables.Count; i++)
             {
                 result += consumables[i].ConsumableToString() + "\n";
+            }
+            for (int i = 0; i < equipables.Count; i++)
+            {
+                result += equipables[i].EquipableToString() + "\n";
             }
             return result;
         }

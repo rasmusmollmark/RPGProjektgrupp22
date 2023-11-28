@@ -38,20 +38,25 @@ namespace RPGProjektgrupp22
                 }
                 else
                 {
-                    while (true)
-                    {
-                        int dungeonChoice = GetPlayerDungeonChoice();
-                        bool dungeonCompleted = dungeons[dungeonChoice].Explore(player);
-
-                        if (dungeonCompleted)
-                        {
-                            GoToTown();
-                            return;
-                        }
-                    }
+                    PlayerWantsToExploreDungeon();
                 }
             }
 
+        }
+
+        private void PlayerWantsToExploreDungeon()
+        {
+            while (true)
+            {
+                int dungeonChoice = GetPlayerDungeonChoice();
+                bool dungeonCompleted = dungeons[dungeonChoice].Explore(player);
+
+                if (dungeonCompleted)
+                {
+                    ContinueStory();
+                    return;
+                }
+            }
         }
 
         private int GetUserInput()
@@ -80,13 +85,15 @@ namespace RPGProjektgrupp22
                 {
                     case 1:
                         Console.WriteLine(player.PrintInventory());
+
+                        Console.ReadKey();
                         break;
                     case 2:
                         Console.WriteLine("Going to vendors");
                         MeetVendors();
                         break;
                     case 3:
-                        ContinueStory();
+                        PlayerWantsToExploreDungeon();
                         break;
                     default:
                         Console.WriteLine("Invalid input. Enter a number between 1 and 3");
@@ -119,6 +126,10 @@ namespace RPGProjektgrupp22
                     case 3: 
                         vendor.TellGossip();
                         break;
+                    case 4:
+                        return;
+                    default: Console.WriteLine("Invalid input");
+                        break;
                 }
             }
         }
@@ -137,8 +148,21 @@ namespace RPGProjektgrupp22
                     switch (input)
                     {
                         case 1:
+                            if (!haveSpokenWithAkara)
+                            {
+                                Vendor akara = new Akara();
+                                akara.TellWelcome();
+                                haveSpokenWithAkara = true;
+                            }
                             return new Akara();
+
                         case 2:
+                            if (!haveSpokenWithCharsi)
+                            {
+                                Vendor charsi = new Charsi();
+                                charsi.TellWelcome();
+                                haveSpokenWithCharsi = true;
+                            }
                             return new Charsi();
                         case 3: return null;
                     }
