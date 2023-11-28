@@ -22,7 +22,7 @@ namespace RPGProjektgrupp22
         public Dungeon(int i)
         {
             dungeonIndex = i;
-            Console.WriteLine("A dungeon named" + dungeonNameList[i] + " has been created");
+            
         } 
         public bool Explore (Player player)
         {
@@ -41,7 +41,7 @@ namespace RPGProjektgrupp22
 
             else
             {
-                Console.WriteLine("You found a chest!");
+                
                 FindChest();
                 //Console.WriteLine("You are in the" + dungeonNameList[dungeonIndex]);
             }
@@ -56,7 +56,7 @@ namespace RPGProjektgrupp22
 
         private void EncounterEnemy(Player player)
         {
-            Console.WriteLine("You have encountered an enemy!");
+            Console.Clear();
             Enemy enemy = Enemy.GetRandomEnemy();
             Fight fight = new Fight(enemy, this);
             fight.Start(player);
