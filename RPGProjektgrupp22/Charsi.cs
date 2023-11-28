@@ -100,6 +100,9 @@ namespace RPGProjektgrupp22
             Console.ReadKey();
         }
 
-        
+        public string InventoryToString()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -10,6 +10,8 @@ namespace RPGProjektgrupp22
     {
         string Name { get; }
 
+        public string InventoryToString();
+
 
         public void AddLore();
 

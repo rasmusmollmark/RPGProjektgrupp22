@@ -113,6 +113,7 @@ namespace RPGProjektgrupp22
                         vendor.SellItems(player);
                         break;
                     case 2:
+                        Console.WriteLine(vendor.InventoryToString());
                         vendor.BuyItems(player);
                         break;
                     case 3: 

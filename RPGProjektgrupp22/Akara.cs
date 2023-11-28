@@ -19,6 +19,9 @@ namespace RPGProjektgrupp22
 "Welcome back, my friend. We are still clearing the monastery, but you're welcome to stay here as long as you need.",
 "Yes?"};
         public string Name => name;
+
+        private VendorInventory inventory;
+
         public Akara() 
         {
             GenerateShop();
@@ -27,8 +30,10 @@ namespace RPGProjektgrupp22
 
         private void GenerateShop()
         {
-            
+            inventory = new VendorInventory(new Random().Next(4, 7));
         }
+
+        public string InventoryToString() => inventory.InventoryToString();
 
         public void TellGossip()
         {
@@ -102,7 +107,6 @@ namespace RPGProjektgrupp22
 
         public void BuyItems(Player player)
         {
-            throw new NotImplementedException();
         }
     }
 }

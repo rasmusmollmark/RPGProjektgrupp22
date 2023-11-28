@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace RPGProjektgrupp22
 {
-    public class MinorHealingPotion : HealingPotion
+    public class BreastPlate : ChestArmor
     {
-        public MinorHealingPotion() : base(30, "Minor", 5)
+        public BreastPlate() : base("Breast Plate", new Random().Next(4, 12))
         {
+
         }
     }
 }

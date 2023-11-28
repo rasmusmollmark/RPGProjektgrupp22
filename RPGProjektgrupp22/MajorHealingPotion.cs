@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace RPGProjektgrupp22
 {
-    public class MinorHealingPotion : HealingPotion
+    public class MajorHealingPotion : HealingPotion
     {
-        public MinorHealingPotion() : base(30, "Minor", 5)
+        public MajorHealingPotion() : base(100, "Major", 20)
         {
         }
     }
