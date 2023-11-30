@@ -10,7 +10,7 @@ namespace RPGProjektgrupp22
     {
         private int defense;
 
-        public ChestArmor(string type, int defense) : base(defense/4, type)
+        public ChestArmor(string type, int defense) : base(defense/2, type)
         {
             this.defense = defense;
         }

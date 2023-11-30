@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.XPath;
@@ -21,11 +23,18 @@ namespace RPGProjektgrupp22
         public Inventory() 
         {
             EquipStarterItems();
+            RecieveStarterPotions();
+        }
+
+        private void RecieveStarterPotions()
+        {
             for(int i = 0; i < 4; i++)
             {
                 consumablesList.Add(new MinorHealingPotion());
             }
         }
+
+        public void AddConsumableToList(Consumable consumable) => consumablesList.Add(consumable);
 
         private void EquipStarterItems()
         {
@@ -35,7 +44,32 @@ namespace RPGProjektgrupp22
             secondHand.Equip();
         }
 
-        public void AddItemToInventory(Equipable item) => itemsInventoryList.Add(item);
+        public void RemoveItem(Equipable item)
+        {
+            if (itemsInventoryList.Contains(item))
+            {
+                itemsInventoryList.Remove(item);
+            }
+            else
+            {
+                switch (item)
+                {
+                    case Weapon sword:
+                        firstHand = null;
+                        break;
+                    case Shield shield:
+                        secondHand = null;
+                        break;
+                    case Helmet helmet:
+                        helm = null;
+                        break;
+                    case ChestArmor armor:
+                        chestArmor = null;
+                        break;
+
+                }
+            }
+        }
 
         public string InventoryToString()
         {
@@ -52,6 +86,43 @@ namespace RPGProjektgrupp22
                 result += consumable.ConsumableToString() + "\n";
             }
             return result;
+        }
+
+        public string SellItemsInventoryToString(List<Equipable> sellList)
+        {
+            string result = "";
+            for(int i = 0; i < sellList.Count; i++)
+            {
+                result += i+1 + ". " + sellList[i].EquipableToString() + "\n";
+            }
+            return result;
+        }
+
+        public List<Equipable> GetPlayerSellList()
+        {
+            List<Equipable> result = new List<Equipable>();
+            foreach (Equipable item in itemsInventoryList)
+            {
+                result.Add(item);
+            }
+            if (firstHand != null)
+            {
+                result.Add(firstHand);
+            }
+            if (secondHand != null)
+            {
+                result.Add(secondHand);
+            }
+            if (helm != null)
+            {
+                result.Add(helm);
+            }
+            if (chestArmor != null)
+            {
+                result.Add(chestArmor);
+            }
+            return result;
+
         }
 
         private string EquippedItemsToString()
@@ -99,29 +170,38 @@ namespace RPGProjektgrupp22
 
         public int Heal(int playerHealth)
         {
-            int heal = 0;
-            for(int i = 0; i < consumablesList.Count; i++)
-            {
-                Console.WriteLine(i+1+". " + consumablesList[i].ConsumableToString());
-            }
+            
             while(true)
             {
-                Console.Write("\nCurrent helth: "+ playerHealth + "\nPlease input the number of the item you would like to consume (anything else for no): ");
+                for (int i = 0; i < consumablesList.Count; i++)
+                {
+                    Console.WriteLine(i + 1 + ". " + consumablesList[i].ConsumableToString());
+                }
+                Console.Write("\nCurrent health: "+ playerHealth + "\nPlease input the number of the item you would like to consume (anything else for no): ");
                 if (int.TryParse(Console.ReadLine(), out int inputForConsumable) && inputForConsumable > 0 && inputForConsumable <= consumablesList.Count)
                 {
-                    heal += Consume(inputForConsumable - 1);
+                    playerHealth += Consume(inputForConsumable - 1);
                     Console.WriteLine("Potion consumed successfully!\n");
+                    if(playerHealth > 100)
+                    {
+                        playerHealth = 100;
+                    }
                 }
                 else
                 {
                     break;
                 }
             }
-            return playerHealth += heal;
+            return playerHealth;
             
         }
 
-        private int Consume(int index) => (consumablesList[index] as HealingPotion).HPHealed;
+        private int Consume(int index)
+        {
+            int hpHealed = (consumablesList[index] as HealingPotion).HPHealed;
+            consumablesList.Remove(consumablesList[index]);
+            return hpHealed;
+        }
 
         private void Equip(int index)
         {
@@ -197,7 +277,8 @@ namespace RPGProjektgrupp22
                 result += (secondHand as Shield).Defense;
             }
             return result;
-        } 
-        
+        }
+
+        public void AddItemToList(Equipable equipable) => itemsInventoryList.Add(equipable);
     }
 }

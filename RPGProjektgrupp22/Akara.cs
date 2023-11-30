@@ -106,11 +106,59 @@ namespace RPGProjektgrupp22
 
         public void SellItems(Player player)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("WARNING\nSold items cannot be bought back!");
+            Thread.Sleep(1000);
+            List<Equipable> sellList = player.GetSellList();
+            while (true && sellList.Count > 0)
+            {
+                player.PrintSellInventory(sellList);
+                Console.WriteLine("Please input the number of the item you would like to sell: (0 to exit vendor)");
+                if (int.TryParse(Console.ReadLine(), out int input) && input > 0 && input <= sellList.Count)
+                {
+                    player.Gold += sellList[input-1].SellValue;
+                    player.RemoveItemFromInventory(sellList[input-1]);
+                    sellList.Remove(sellList[input - 1]);
+                    Console.WriteLine("Item sold successfully! " +
+                        "\nBalance: " + player.Gold);
+                }
+                else if(input == 0)
+                {
+                    return;
+                }
+            }
         }
 
         public void BuyItems(Player player)
         {
+            while (true)
+            {
+                Console.WriteLine(inventory.InventoryToString());
+                Console.WriteLine(player.Gold + " gold\nPlease input the number of the item you would like to buy: (press 0 to exit vendor)");
+                if(int.TryParse(Console.ReadLine(), out int input) && input > 0 && input < 6)
+                {
+                    Consumable consumable = inventory.consumables[input-1];
+                    if(PlayerHasEnoughGold(player, consumable))
+                    {
+                        player.RecieveBoughtConsumable(consumable);
+                        player.Gold -= consumable.Price;
+                        RemoveConsumableFromInventory(consumable);
+                        Console.WriteLine("Consumable purchased successfully!\nItem bought: " + consumable.ConsumableToString() + "\nCurrent balance: " + player.Gold);
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("Not enough gold!");
+                    }
+                }
+                else if(input == 0)
+                {
+                    return;
+                }
+            }
         }
+
+        private bool PlayerHasEnoughGold(Player player, Consumable consumable) => player.Gold >= consumable.Price;
+
+        private void RemoveConsumableFromInventory(Consumable consumable) => inventory.consumables.Remove(consumable);
     }
 }

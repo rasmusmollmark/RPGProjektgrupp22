@@ -68,7 +68,7 @@ namespace RPGProjektgrupp22
         private void FindChest(Player player)
         {
             Loot loot = new ChestLoot();
-            Console.WriteLine("You found a chest containing "+ loot.Gold +"!");
+            Console.WriteLine("You found a chest containing "+ loot.Gold +" gold!");
             player.RecieveLoot(loot);
             Console.WriteLine("Press any key to continue");
             Console.ReadKey();

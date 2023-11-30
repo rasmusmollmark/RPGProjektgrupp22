@@ -11,6 +11,7 @@ namespace RPGProjektgrupp22
         private int expGiven; // Ett fält som anger hur mycket erfarenhet en fiende ger
         private int goldGiven; // Ett fält som anger hur mycket guld en fiende ger
         private static List<Enemy> enemies = new List<Enemy>();
+        private EnemyLootDrop lootDrop;
 
         static Enemy()
         {
@@ -22,8 +23,10 @@ namespace RPGProjektgrupp22
         {
             this.expGiven = expGiven; // Tilldela expGiven till fältet
             this.goldGiven = goldGiven; // Tilldela goldGiven till fältet
+            lootDrop = new EnemyLootDrop(goldGiven);
         }
 
+        public EnemyLootDrop LootDrop => lootDrop;
         public int GetExpGiven() => expGiven; // En metod som returnerar expGiven
 
         public int GetGoldGiven() => goldGiven; // En metod som returnerar goldGiven

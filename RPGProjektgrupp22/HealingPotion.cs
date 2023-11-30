@@ -20,6 +20,7 @@ namespace RPGProjektgrupp22
         public string ConsumableToString() => type + " heals "+hpHealed+" hp. Price: " + price;
 
         public int HPHealed => hpHealed;
+        public int Price => price;
         
     }
 }

@@ -8,8 +8,8 @@ namespace RPGProjektgrupp22
 {
     public class VendorInventory
     {
-        List<Consumable> consumables = new List<Consumable>();
-        List<Equipable> equipables = new List<Equipable>();
+        public List<Consumable> consumables = new List<Consumable>();
+        public List<Equipable> equipables = new List<Equipable>();
         
         public VendorInventory(int amountOfHealingPotions)
         {
@@ -50,11 +50,11 @@ namespace RPGProjektgrupp22
             string result = "\n\n\nAvailable items:\n";
             for(int i  = 0; i < consumables.Count; i++)
             {
-                result += consumables[i].ConsumableToString() + "\n";
+                result += i + 1 + ". "+ consumables[i].ConsumableToString() + "\n";
             }
             for (int i = 0; i < equipables.Count; i++)
             {
-                result += equipables[i].EquipableToString() + "\n";
+                result += i + 1 + ". " + equipables[i].EquipableToString() +" Price: "+ equipables[i].Price + "\n";
             }
             return result;
         }

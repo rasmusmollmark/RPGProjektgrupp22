@@ -29,10 +29,14 @@ namespace RPGProjektgrupp22
         public void RecieveLoot(Loot loot, int xpGiven)
         {
             gold += loot.Gold;
-            inventory.AddItemToInventory(loot.Item);
+            inventory.AddItemToList(loot.Item);
+            
             xp += xpGiven;
             CheckIfLevelUp();
         }
+
+        public void RecieveBoughtConsumable(Consumable consumable) => inventory.AddConsumableToList(consumable);
+        public void RecieveBoughtEquippable(Equipable equipable) => inventory.AddItemToList(equipable);
 
         private void CheckIfLevelUp()
         {
@@ -62,6 +66,7 @@ namespace RPGProjektgrupp22
             gold += loot.Gold;
         }
 
+        public int Gold { set => gold = value;  get => gold; }
 
         public void LevelCompleted()
         {
@@ -80,7 +85,7 @@ namespace RPGProjektgrupp22
         public void InteractWithInventory()
         {
             inventory.Interact();
-            Console.Write("Press 1 to use consumable: ");
+            Console.Write("\nPress 1 to use consumable: (anything else to exit) ");
             if(int.TryParse(Console.ReadLine(), out int result) && result == 1)
             {
                 Health = inventory.Heal(Health);
@@ -93,6 +98,13 @@ namespace RPGProjektgrupp22
 
 
         public bool DoesPlayerBlock() => new Random().Next(1, 101) <= inventory.GetBlockChance();
+
+        public void PrintSellInventory(List<Equipable> sellList) => Console.WriteLine(inventory.SellItemsInventoryToString(sellList));
+
+        public List<Equipable> GetSellList() => inventory.GetPlayerSellList();
+
+        public void RemoveItemFromInventory(Equipable equipable) => inventory.RemoveItem(equipable);
+        
     }
     
 }

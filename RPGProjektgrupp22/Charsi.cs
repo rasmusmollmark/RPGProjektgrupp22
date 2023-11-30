@@ -84,15 +84,64 @@ namespace RPGProjektgrupp22
 
         public void SellItems(Player player)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("WARNING\nSold items cannot be bought back!");
+            Thread.Sleep(1000);
+            List<Equipable> sellList = player.GetSellList();
+            while (true && sellList.Count > 0)
+            {
+                player.PrintSellInventory(sellList);
+                Console.WriteLine("Please input the number of the item you would like to sell: (0 to exit vendor)");
+                if (int.TryParse(Console.ReadLine(), out int input) && input > 0 && input <= sellList.Count)
+                {
+                    player.Gold += sellList[input - 1].SellValue;
+                    player.RemoveItemFromInventory(sellList[input - 1]);
+                    sellList.Remove(sellList[input - 1]);
+                    Console.WriteLine("Item sold successfully! " +
+                        "\nBalance: " + player.Gold);
+                }
+                else if (input == 0)
+                {
+                    return;
+                }
+            }
         }
 
         public void BuyItems(Player player)
         {
-            
+            while (true)
+            {
+                
+                Console.WriteLine(inventory.InventoryToString());
+                Console.WriteLine(player.Gold + " gold\nPlease input the number of the item you would like to buy: (press 0 to exit vendor)");
+                if (int.TryParse(Console.ReadLine(), out int input) && input > 0 && input < 6)
+                {
+                    Equipable equipable = inventory.equipables[input - 1];
+                    if (PlayerHasEnoughGold(player, equipable))
+                    {
+                        player.RecieveBoughtEquippable(equipable);
+                        player.Gold -= equipable.Price;
+                        RemoveItemFromInventory(equipable);
+                        Console.WriteLine("Item purchased successfully!\nItem bought: " + equipable.EquipableToString() + "\nCurrent balance: " + player.Gold);
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("Not enough gold!");
+                    }
+                }
+                else if (input == 0)
+                {
+                    return;
+                }
+            }
         }
 
-        public void TellWelcome()
+        private bool PlayerHasEnoughGold(Player player, Equipable equipable) => player.Gold >= equipable.Price;
+
+        private void RemoveItemFromInventory(Equipable equipable) => inventory.equipables.Remove(equipable);
+    
+
+    public void TellWelcome()
         {
             for (int i = 0; i < Lore[0].Length; i++)
             {

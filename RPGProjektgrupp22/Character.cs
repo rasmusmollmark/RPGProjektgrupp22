@@ -38,7 +38,8 @@ namespace RPGProjektgrupp22
 
         protected int Health
         {
-            set { if (health + value > maxHealth)  health = maxHealth;  }
+            set { if (value > maxHealth) { health = maxHealth; }
+                else { health = value; } }
             get { return health; }
         }
 

@@ -46,8 +46,10 @@ namespace RPGProjektgrupp22
 
         private void PlayerWantsToExploreDungeon()
         {
+            ClearWindow();
             while (true)
             {
+                
                 int dungeonChoice = GetPlayerDungeonChoice();
                 bool dungeonCompleted = dungeons[dungeonChoice].Explore(player);
 
@@ -84,11 +86,14 @@ namespace RPGProjektgrupp22
                 switch (input)
                 {
                     case 1:
+                        ClearWindow();
                         Console.WriteLine(player.PrintInventory());
                         player.InteractWithInventory();
                         break;
                     case 2:
+                        ClearWindow();
                         Console.WriteLine("Going to vendors");
+                        Thread.Sleep(1000);
                         MeetVendors();
                         break;
                     case 3:
@@ -111,6 +116,7 @@ namespace RPGProjektgrupp22
             vendor.GreetPlayer();
             while (true)
             {
+                ClearWindow();
                 vendor.OptionForPlayerMeeting();
                 int input = GetUserInput();
                 switch (input)
@@ -119,7 +125,6 @@ namespace RPGProjektgrupp22
                         vendor.SellItems(player);
                         break;
                     case 2:
-                        Console.WriteLine(vendor.InventoryToString());
                         vendor.BuyItems(player);
                         break;
                     case 3: 
@@ -137,6 +142,7 @@ namespace RPGProjektgrupp22
         {
             while(true)
             {
+                ClearWindow();
                 Console.WriteLine("Which vendor do you want to see?\n" +
                     "1. Akara\n" +
                     "2. Charsi\n" +
@@ -149,6 +155,7 @@ namespace RPGProjektgrupp22
                         case 1:
                             if (!haveSpokenWithAkara)
                             {
+                                ClearWindow();
                                 Vendor akara = new Akara();
                                 akara.TellWelcome();
                                 haveSpokenWithAkara = true;
@@ -158,6 +165,7 @@ namespace RPGProjektgrupp22
                         case 2:
                             if (!haveSpokenWithCharsi)
                             {
+                                ClearWindow();
                                 Vendor charsi = new Charsi();
                                 charsi.TellWelcome();
                                 haveSpokenWithCharsi = true;
