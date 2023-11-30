@@ -22,6 +22,15 @@ namespace RPGProjektgrupp22
         public abstract string EquipableToString();
 
         public bool isEquipped() => equipped;
+
+        public void Equip()
+        {
+            equipped = true;
+        }
+        public void UnEquip()
+        {
+            equipped = false;
+        }
         
     }
 }

@@ -22,13 +22,9 @@ namespace RPGProjektgrupp22
         public Player(string name) : base(name, 100, 20, 20, 15, 10)
         {
             inventory = new Inventory();
-            EquipStarterItems();
         }
 
-        private void EquipStarterItems()
-        {
-            inventory.
-        }
+        
 
         public void RecieveLoot(Loot loot, int xpGiven)
         {
@@ -81,7 +77,10 @@ namespace RPGProjektgrupp22
 
         public string PrintInventory() => "Gold: "+ gold + "\n" + inventory.InventoryToString();
 
-        
+        public void InteractWithInventory()
+        {
+            inventory.Interact();
+        }
     }
     
 }
