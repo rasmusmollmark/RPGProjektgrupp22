@@ -86,7 +86,6 @@ namespace RPGProjektgrupp22
                     case 1:
                         Console.WriteLine(player.PrintInventory());
                         player.InteractWithInventory();
-                        Console.ReadKey();
                         break;
                     case 2:
                         Console.WriteLine("Going to vendors");

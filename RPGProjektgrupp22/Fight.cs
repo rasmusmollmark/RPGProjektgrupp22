@@ -62,9 +62,16 @@ namespace RPGProjektgrupp22
         {
             int damage = rnd.Next(attacker.GetStrength() - defender.GetDefense(), attacker.GetStrength() + defender.GetDefense()); // Calculate the damage based on the attacker's strength and the defender's defense
             if (damage < 0) damage = 0; // Make sure the damage is not negative
-            Console.WriteLine(attacker.GetName() + " attacks " + defender.GetName() + " for " + damage + " damage!"); // Print a message about the attack
-            defender.SetHealth(defender.GetHealth() - damage); // Update the defender's health
-            Console.WriteLine(defender.GetName() + "'s health: " + defender.GetHealth()); // Print the defender's health
+            if(defender is Player && (defender as Player).DoesPlayerBlock())
+            {
+                Console.WriteLine(defender.GetName() + " blocked!");
+            }
+            else
+            {
+                Console.WriteLine(attacker.GetName() + " attacks " + defender.GetName() + " for " + damage + " damage!"); // Print a message about the attack
+                defender.SetHealth(defender.GetHealth() - damage); // Update the defender's health
+                Console.WriteLine(defender.GetName() + "'s health: " + defender.GetHealth()); // Print the defender's health
+            }
         }
         private void Attack(Character attacker,Character defender, int attackerStrength)
         {

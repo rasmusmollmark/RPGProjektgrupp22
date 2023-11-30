@@ -8,7 +8,7 @@ namespace RPGProjektgrupp22
 {
     public abstract class Character
     {
-        protected int health; // Ett fält som representerar hälsa
+        private int health; // Ett fält som representerar hälsa
         protected int maxHealth; // Ett fält som representerar maximal hälsa
         protected string name; // Ett fält som representerar namn
         protected int strength; // Ett fält som representerar styrka
@@ -36,15 +36,21 @@ namespace RPGProjektgrupp22
 
         public bool IsDead => isDead;
 
+        protected int Health
+        {
+            set { if (health + value > maxHealth)  health = maxHealth;  }
+            get { return health; }
+        }
+
         public string GetName() => name;
 
         public int GetHealth() => health; // En metod som returnerar health
 
         public int GetMaxHealth() => maxHealth; // En metod som returnerar maxHealth
 
-        public int GetStrength() => strength; // En metod som returnerar strength
+        public abstract int GetStrength(); // En metod som returnerar strength
 
-        public int GetDefense() => defense; // En metod som returnerar defense
+        public abstract int GetDefense(); // En metod som returnerar defense
 
         public int GetAgility() => agility; // En metod som returnerar agility
 

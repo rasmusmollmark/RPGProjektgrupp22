@@ -16,6 +16,11 @@ namespace RPGProjektgrupp22
         }
 
         public override string EquipableToString() => type + " Damage: " + damageModifier;
+
+        public int DamageModifier
+        {
+            get => damageModifier; 
+        }
         
     }
 }

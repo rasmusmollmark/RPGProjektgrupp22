@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.XPath;
 
 namespace RPGProjektgrupp22
 {
@@ -96,6 +97,32 @@ namespace RPGProjektgrupp22
             }
         }
 
+        public int Heal(int playerHealth)
+        {
+            int heal = 0;
+            for(int i = 0; i < consumablesList.Count; i++)
+            {
+                Console.WriteLine(i+1+". " + consumablesList[i].ConsumableToString());
+            }
+            while(true)
+            {
+                Console.Write("\nCurrent helth: "+ playerHealth + "\nPlease input the number of the item you would like to consume (anything else for no): ");
+                if (int.TryParse(Console.ReadLine(), out int inputForConsumable) && inputForConsumable > 0 && inputForConsumable <= consumablesList.Count)
+                {
+                    heal += Consume(inputForConsumable - 1);
+                    Console.WriteLine("Potion consumed successfully!\n");
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return playerHealth += heal;
+            
+        }
+
+        private int Consume(int index) => (consumablesList[index] as HealingPotion).HPHealed;
+
         private void Equip(int index)
         {
             switch (itemsInventoryList[index])
@@ -135,5 +162,42 @@ namespace RPGProjektgrupp22
                 itemsInventoryList.Remove(toBeEquipped);
             }
         }
+
+        public int GetDamageModifier()
+        {
+            if (firstHand != null)
+            {
+                return (firstHand as Weapon).DamageModifier;
+            }
+            return 0;
+        }
+
+        public int GetBlockChance()
+        {
+            if (secondHand != null)
+            {
+                return (secondHand as Shield).BlockChance;
+            }
+            return 0;
+        }
+
+        internal int GetAllAdditionalDefense() 
+        {
+            int result = 0;
+            if(chestArmor != null)
+            {
+                result += (chestArmor as ChestArmor).Defense;
+            }
+            if(helm != null)
+            {
+                result += (helm as Helmet).Defense;
+            }
+            if(secondHand != null)
+            {
+                result += (secondHand as Shield).Defense;
+            }
+            return result;
+        } 
+        
     }
 }

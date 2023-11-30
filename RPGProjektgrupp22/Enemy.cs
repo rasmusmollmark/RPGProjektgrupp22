@@ -39,5 +39,10 @@ namespace RPGProjektgrupp22
             int enemyIndex = rnd.Next(0, enemies.Count); // Generera ett slumpmässigt index
             return enemies[enemyIndex]; // Returnera fienden på det indexet
         }
+
+        public override int GetStrength() => strength;
+
+        public override int GetDefense() => defense;
+       
     }
 }

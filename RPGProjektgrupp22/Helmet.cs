@@ -15,5 +15,10 @@ namespace RPGProjektgrupp22
         }
 
         public override string EquipableToString() => type + " Defense: " + defense;
+
+        public int Defense
+        {
+            get => defense;
+        }
     }
 }

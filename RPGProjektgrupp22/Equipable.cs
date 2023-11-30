@@ -31,6 +31,5 @@ namespace RPGProjektgrupp22
         {
             equipped = false;
         }
-        
     }
 }

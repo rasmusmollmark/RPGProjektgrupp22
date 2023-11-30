@@ -68,19 +68,31 @@ namespace RPGProjektgrupp22
             levelsCompletedThisStage++;
             levelsCompletedTotal++;
             damage++;
-            health += 2;
+            Health += 2;
         }
 
         public int GetLevelsCompleted() => levelsCompletedThisStage;
         
         public void ResetLevelsCompleted() => levelsCompletedThisStage = 0;
 
-        public string PrintInventory() => "Gold: "+ gold + "\n" + inventory.InventoryToString();
+        public string PrintInventory() => "\nHitpoints: " + Health + "\n" + "Gold: "+ gold + "\n" + inventory.InventoryToString();
 
         public void InteractWithInventory()
         {
             inventory.Interact();
+            Console.Write("Press 1 to use consumable: ");
+            if(int.TryParse(Console.ReadLine(), out int result) && result == 1)
+            {
+                Health = inventory.Heal(Health);
+            }
         }
+
+        public override int GetStrength() => strength * inventory.GetDamageModifier();
+
+        public override int GetDefense() => defense + inventory.GetAllAdditionalDefense();
+
+
+        public bool DoesPlayerBlock() => new Random().Next(1, 101) <= inventory.GetBlockChance();
     }
     
 }
