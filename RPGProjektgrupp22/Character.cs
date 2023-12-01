@@ -38,8 +38,11 @@ namespace RPGProjektgrupp22
 
         protected int Health
         {
-            set { if (value > maxHealth) { health = maxHealth; }
-                else { health = value; } }
+            set
+            {
+                if (value > maxHealth) { health = maxHealth; }
+                else { health = value; }
+            }
             get { return health; }
         }
 
@@ -74,7 +77,7 @@ namespace RPGProjektgrupp22
                 isDead = true; // Sätt isDead till true
             }
         }
-        
+
 
         public void AttackCharacter(Character character) // En metod som attackerar en annan karaktär
         {

@@ -24,13 +24,13 @@ namespace RPGProjektgrupp22
             inventory = new Inventory();
         }
 
-        
+
 
         public void RecieveLoot(Loot loot, int xpGiven)
         {
             gold += loot.Gold;
             inventory.AddItemToList(loot.Item);
-            
+
             xp += xpGiven;
             CheckIfLevelUp();
         }
@@ -40,7 +40,7 @@ namespace RPGProjektgrupp22
 
         private void CheckIfLevelUp()
         {
-            if(xp > xpToNextLevel)
+            if (xp > xpToNextLevel)
             {
                 LevelUp();
             }
@@ -57,8 +57,8 @@ namespace RPGProjektgrupp22
         private void PrintLevelUp()
         {
             Console.WriteLine("Level up!\n"
-                +name +" is now level "+ level+". \n" +
-                "Xp needed for next level: (" +xp+"/"+xpToNextLevel+")");
+                + name + " is now level " + level + ". \n" +
+                "Xp needed for next level: (" + xp + "/" + xpToNextLevel + ")");
         }
 
         public void RecieveLoot(Loot loot)
@@ -66,7 +66,7 @@ namespace RPGProjektgrupp22
             gold += loot.Gold;
         }
 
-        public int Gold { set => gold = value;  get => gold; }
+        public int Gold { set => gold = value; get => gold; }
 
         public void LevelCompleted()
         {
@@ -77,16 +77,16 @@ namespace RPGProjektgrupp22
         }
 
         public int GetLevelsCompleted() => levelsCompletedThisStage;
-        
+
         public void ResetLevelsCompleted() => levelsCompletedThisStage = 0;
 
-        public string PrintInventory() => "\nHitpoints: " + Health + "\n" + "Gold: "+ gold + "\n" + inventory.InventoryToString();
+        public string PrintInventory() => "\nHitpoints: " + Health + "\n" + "Gold: " + gold + "\n" + inventory.InventoryToString();
 
         public void InteractWithInventory()
         {
             inventory.Interact();
             Console.Write("\nPress 1 to use consumable: (anything else to exit) ");
-            if(int.TryParse(Console.ReadLine(), out int result) && result == 1)
+            if (int.TryParse(Console.ReadLine(), out int result) && result == 1)
             {
                 Health = inventory.Heal(Health);
             }
@@ -104,7 +104,7 @@ namespace RPGProjektgrupp22
         public List<Equipable> GetSellList() => inventory.GetPlayerSellList();
 
         public void RemoveItemFromInventory(Equipable equipable) => inventory.RemoveItem(equipable);
-        
+
     }
-    
+
 }

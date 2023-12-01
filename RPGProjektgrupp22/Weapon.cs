@@ -9,18 +9,18 @@ namespace RPGProjektgrupp22
     public class Weapon : Equipable
     {
         protected int damageModifier;
-        
+
         public Weapon(int damageModifier, int sellValue, string type) : base(sellValue, type)
         {
-           this.damageModifier = damageModifier;
+            this.damageModifier = damageModifier;
         }
 
         public override string EquipableToString() => type + " Damage: " + damageModifier;
 
         public int DamageModifier
         {
-            get => damageModifier; 
+            get => damageModifier;
         }
-        
+
     }
 }

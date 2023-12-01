@@ -3,69 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace RPGProjektgrupp22
 {
     public class Akara : Vendor
     {
-        private string name = "Akara";
-        private List<string> Lore = new List<string>();
-        private VendorInventory inventory;
-        private string[] differentTypesOfGreetings = new string[] {"Good day.",
-"Good evening.",
-"Good morning.",
-"Greetings.",
-"Hello.",
-"The Order welcomes you.",
-"Welcome back, my friend. We are still clearing the monastery, but you're welcome to stay here as long as you need.",
-"Yes?"};
-        public string Name => name;
-
-        public VendorInventory Inventory => inventory;
-
-        
-
-        public Akara() 
+        public Akara()
         {
+            name = "Akara";
             GenerateInventory();
             AddLore();
         }
 
-        
-            
-
-        public string InventoryToString() => inventory.InventoryToString();
-
-        public void TellGossip()
-        {
-            for(int i = 0; i < Lore[1].Length; i++)
-            {
-                Console.Write(Lore[1][i]);
-                Thread.Sleep(10);
-                if (Console.KeyAvailable)
-                {
-                    break;
-                }
-            }
-            Console.ReadKey();
-            Console.WriteLine();
-        }
-        public void TellWelcome()
-        {
-            for (int i = 0; i < Lore[0].Length; i++)
-            {
-                Console.Write(Lore[0][i]);
-                Thread.Sleep(10);
-                if (Console.KeyAvailable)
-                {
-                    break;
-                }
-            }
-            Console.ReadKey();
-            Console.WriteLine();
-        }
-
-        public void AddLore()
+        public override void AddLore()
         {
             string welcome = "I am  Akara, High Priestess of the Sisterhood of the Sightless Eye.\n" +
                 "I welcome you, traveler, to our camp, but I'm afraid I can offer you but poor shelter within these rickety walls." +
@@ -81,63 +32,33 @@ namespace RPGProjektgrupp22
                 "prospect of adventure and danger. She takes great Pride in her work and finds comfort in the fact that her \n" +
                 "weapons and armor are helping to end this evil Plague.";
             Lore.Add(gossipAboutCharsi);
-           
-            
+            differentTypesOfGreetings = new string[] {"Good day.",
+"Good evening.",
+"Good morning.",
+"Greetings.",
+"Hello.",
+"The Order welcomes you.",
+"Welcome back, my friend. We are still clearing the monastery, but you're welcome to stay here as long as you need.",
+"Yes?"};
+
         }
 
-        public void GenerateInventory()
+        public override void GenerateInventory()
         {
             inventory = new VendorInventory(new Random().Next(4, 7));
         }
 
-        public void OptionForPlayerMeeting()
-        {
-            Console.WriteLine("1. Sell items\n" +
-            "2. Buy items\n" +
-            "3. Hear stories\n" +
-            "4. Back to town");
 
-        }
-
-        public void GreetPlayer()
-        {
-            Console.WriteLine(differentTypesOfGreetings[new Random().Next(1, differentTypesOfGreetings.Length)]);
-        }
-
-        public void SellItems(Player player)
-        {
-            Console.WriteLine("WARNING\nSold items cannot be bought back!");
-            Thread.Sleep(1000);
-            List<Equipable> sellList = player.GetSellList();
-            while (true && sellList.Count > 0)
-            {
-                player.PrintSellInventory(sellList);
-                Console.WriteLine("Please input the number of the item you would like to sell: (0 to exit vendor)");
-                if (int.TryParse(Console.ReadLine(), out int input) && input > 0 && input <= sellList.Count)
-                {
-                    player.Gold += sellList[input-1].SellValue;
-                    player.RemoveItemFromInventory(sellList[input-1]);
-                    sellList.Remove(sellList[input - 1]);
-                    Console.WriteLine("Item sold successfully! " +
-                        "\nBalance: " + player.Gold);
-                }
-                else if(input == 0)
-                {
-                    return;
-                }
-            }
-        }
-
-        public void BuyItems(Player player)
+        public override void BuyItems(Player player)
         {
             while (true)
             {
                 Console.WriteLine(inventory.InventoryToString());
                 Console.WriteLine(player.Gold + " gold\nPlease input the number of the item you would like to buy: (press 0 to exit vendor)");
-                if(int.TryParse(Console.ReadLine(), out int input) && input > 0 && input < 6)
+                if (int.TryParse(Console.ReadLine(), out int input) && input > 0 && input < 6)
                 {
-                    Consumable consumable = inventory.consumables[input-1];
-                    if(PlayerHasEnoughGold(player, consumable))
+                    Consumable consumable = inventory.consumables[input - 1];
+                    if (PlayerHasEnoughGold(player, consumable.Price))
                     {
                         player.RecieveBoughtConsumable(consumable);
                         player.Gold -= consumable.Price;
@@ -150,15 +71,12 @@ namespace RPGProjektgrupp22
                         Console.WriteLine("Not enough gold!");
                     }
                 }
-                else if(input == 0)
+                else if (input == 0)
                 {
                     return;
                 }
             }
         }
-
-        private bool PlayerHasEnoughGold(Player player, Consumable consumable) => player.Gold >= consumable.Price;
-
         private void RemoveConsumableFromInventory(Consumable consumable) => inventory.consumables.Remove(consumable);
     }
 }

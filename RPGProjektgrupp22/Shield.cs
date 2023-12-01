@@ -16,13 +16,13 @@ namespace RPGProjektgrupp22
             this.blockChance = blockChance;
         }
 
-        public Shield(int defense, int blockChance, string type) : base(defense/4, type)
+        public Shield(int defense, int blockChance, string type) : base(defense / 4, type)
         {
             this.defense = defense;
             this.blockChance = blockChance;
         }
 
-        public override string EquipableToString() => type + " Defense: " + defense + " Blockchance: "+ blockChance;
+        public override string EquipableToString() => type + " Defense: " + defense + " Blockchance: " + blockChance;
 
         public int Defense
         {

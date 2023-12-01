@@ -16,7 +16,7 @@ namespace RPGProjektgrupp22
         public Fight(Enemy enemy, Dungeon dungeon)
         {
             this.enemy = enemy; // Assign the enemy parameter to the enemy field
-            
+
         }
 
 
@@ -50,7 +50,7 @@ namespace RPGProjektgrupp22
                     Attack(player, enemy); // Call the Attack method with the player as the parameter and the enemy as the argument
                     break;
                 case 2:
-                    Attack(player, enemy,player.GetStrength());
+                    Attack(player, enemy, player.GetStrength());
                     break;
                 default://Implementera olika typer av attacker
                     Console.WriteLine("You have to fight!"); // Print a message that the player has to fight
@@ -62,7 +62,7 @@ namespace RPGProjektgrupp22
         {
             int damage = rnd.Next(attacker.GetStrength() - defender.GetDefense(), attacker.GetStrength() + defender.GetDefense()); // Calculate the damage based on the attacker's strength and the defender's defense
             if (damage < 0) damage = 0; // Make sure the damage is not negative
-            if(defender is Player && (defender as Player).DoesPlayerBlock())
+            if (defender is Player && (defender as Player).DoesPlayerBlock())
             {
                 Console.WriteLine(defender.GetName() + " blocked!");
             }
@@ -73,20 +73,20 @@ namespace RPGProjektgrupp22
                 Console.WriteLine(defender.GetName() + "'s health: " + defender.GetHealth()); // Print the defender's health
             }
         }
-        private void Attack(Character attacker,Character defender, int attackerStrength)
+        private void Attack(Character attacker, Character defender, int attackerStrength)
         {
             int CriticalChance = rnd.Next(1, 5);
             if (CriticalChance < 3)
             {
                 Console.WriteLine("Critical hit!");
-                int damage = rnd.Next(attacker.GetStrength()*3 - defender.GetDefense(), attacker.GetStrength()*3 + defender.GetDefense()); // Calculate the damage based on the attacker's strength and the defender's defense
+                int damage = rnd.Next(attacker.GetStrength() * 3 - defender.GetDefense(), attacker.GetStrength() * 3 + defender.GetDefense()); // Calculate the damage based on the attacker's strength and the defender's defense
                 if (damage < 0) damage = 0; // Make sure the damage is not negative
                 Console.WriteLine(attacker.GetName() + " attacks " + defender.GetName() + " for " + damage + " damage!"); // Print a message about the attack
                 defender.SetHealth(defender.GetHealth() - damage); // Update the defender's health
                 Console.WriteLine(defender.GetName() + "'s health: " + defender.GetHealth()); // Print the defender's health
             }
             else { Console.WriteLine("You missed"); }
-            
+
 
         }
 

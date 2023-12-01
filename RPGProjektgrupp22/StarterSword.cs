@@ -8,10 +8,10 @@ namespace RPGProjektgrupp22
 {
     public class StarterSword : StarterWeapon
     {
-        public StarterSword() : base(1, "Sword") 
+        public StarterSword() : base(1, "Sword")
         {
-            
+
         }
-        
+
     }
 }

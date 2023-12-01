@@ -13,14 +13,14 @@ namespace RPGProjektgrupp22
     {
         private List<Equipable> itemsInventoryList = new List<Equipable>();
         private List<Consumable> consumablesList = new List<Consumable>();
-        
+
         private Equipable firstHand;
         private Equipable secondHand;
         private Equipable helm;
         private Equipable chestArmor;
 
 
-        public Inventory() 
+        public Inventory()
         {
             EquipStarterItems();
             RecieveStarterPotions();
@@ -28,7 +28,7 @@ namespace RPGProjektgrupp22
 
         private void RecieveStarterPotions()
         {
-            for(int i = 0; i < 4; i++)
+            for (int i = 0; i < 4; i++)
             {
                 consumablesList.Add(new MinorHealingPotion());
             }
@@ -76,12 +76,12 @@ namespace RPGProjektgrupp22
             string result = "";
             result += "Equipped: \n" + EquippedItemsToString();
             result += "Items in inventory: \n";
-            foreach(Equipable item in itemsInventoryList)
+            foreach (Equipable item in itemsInventoryList)
             {
-               result += item.EquipableToString() + "\n";
+                result += item.EquipableToString() + "\n";
             }
             result += "\nConsumables: \n";
-            foreach(Consumable consumable in consumablesList)
+            foreach (Consumable consumable in consumablesList)
             {
                 result += consumable.ConsumableToString() + "\n";
             }
@@ -91,9 +91,9 @@ namespace RPGProjektgrupp22
         public string SellItemsInventoryToString(List<Equipable> sellList)
         {
             string result = "";
-            for(int i = 0; i < sellList.Count; i++)
+            for (int i = 0; i < sellList.Count; i++)
             {
-                result += i+1 + ". " + sellList[i].EquipableToString() + "\n";
+                result += i + 1 + ". " + sellList[i].EquipableToString() + "\n";
             }
             return result;
         }
@@ -128,11 +128,11 @@ namespace RPGProjektgrupp22
         private string EquippedItemsToString()
         {
             string result = "";
-            if(firstHand != null)
+            if (firstHand != null)
             {
                 result += firstHand.EquipableToString() + "\n";
             }
-            if(secondHand != null)
+            if (secondHand != null)
             {
                 result += secondHand.EquipableToString() + "\n";
             }
@@ -149,17 +149,17 @@ namespace RPGProjektgrupp22
 
         public void Interact()
         {
-            if(itemsInventoryList.Count > 0)
+            if (itemsInventoryList.Count > 0)
             {
                 Console.WriteLine("Would you like to equip non-equipped items? (1 for yes, anything else for no)");
-                if(int.TryParse(Console.ReadLine(), out int input) && input == 1)
+                if (int.TryParse(Console.ReadLine(), out int input) && input == 1)
                 {
-                    for(int i = 0; i < itemsInventoryList.Count; i++)
+                    for (int i = 0; i < itemsInventoryList.Count; i++)
                     {
-                        Console.WriteLine(i + 1 +". "+ itemsInventoryList[i].EquipableToString());
+                        Console.WriteLine(i + 1 + ". " + itemsInventoryList[i].EquipableToString());
                     }
                     Console.Write("Please input the number of the item you would like to equip (anything else for no): ");
-                    if(int.TryParse(Console.ReadLine(), out int inputForItem) && inputForItem > 0 && inputForItem <= itemsInventoryList.Count)
+                    if (int.TryParse(Console.ReadLine(), out int inputForItem) && inputForItem > 0 && inputForItem <= itemsInventoryList.Count)
                     {
                         Equip(inputForItem - 1);
                         Console.WriteLine("Item swapped successfully!");
@@ -170,19 +170,19 @@ namespace RPGProjektgrupp22
 
         public int Heal(int playerHealth)
         {
-            
-            while(true)
+
+            while (true)
             {
                 for (int i = 0; i < consumablesList.Count; i++)
                 {
                     Console.WriteLine(i + 1 + ". " + consumablesList[i].ConsumableToString());
                 }
-                Console.Write("\nCurrent health: "+ playerHealth + "\nPlease input the number of the item you would like to consume (anything else for no): ");
+                Console.Write("\nCurrent health: " + playerHealth + "\nPlease input the number of the item you would like to consume (anything else for no): ");
                 if (int.TryParse(Console.ReadLine(), out int inputForConsumable) && inputForConsumable > 0 && inputForConsumable <= consumablesList.Count)
                 {
                     playerHealth += Consume(inputForConsumable - 1);
                     Console.WriteLine("Potion consumed successfully!\n");
-                    if(playerHealth > 100)
+                    if (playerHealth > 100)
                     {
                         playerHealth = 100;
                     }
@@ -193,7 +193,7 @@ namespace RPGProjektgrupp22
                 }
             }
             return playerHealth;
-            
+
         }
 
         private int Consume(int index)
@@ -232,7 +232,7 @@ namespace RPGProjektgrupp22
         }
         private void Equip(int index, Equipable equipped, Equipable toBeEquipped)
         {
-            if(equipped != null)
+            if (equipped != null)
             {
                 itemsInventoryList[index] = equipped;
                 equipped.UnEquip();
@@ -261,18 +261,18 @@ namespace RPGProjektgrupp22
             return 0;
         }
 
-        internal int GetAllAdditionalDefense() 
+        internal int GetAllAdditionalDefense()
         {
             int result = 0;
-            if(chestArmor != null)
+            if (chestArmor != null)
             {
                 result += (chestArmor as ChestArmor).Defense;
             }
-            if(helm != null)
+            if (helm != null)
             {
                 result += (helm as Helmet).Defense;
             }
-            if(secondHand != null)
+            if (secondHand != null)
             {
                 result += (secondHand as Shield).Defense;
             }

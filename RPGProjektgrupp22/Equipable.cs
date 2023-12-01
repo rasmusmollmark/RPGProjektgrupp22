@@ -19,7 +19,7 @@ namespace RPGProjektgrupp22
 
         public abstract string EquipableToString();
 
-        public int Price => sellValue*3;
+        public int Price => sellValue * 3;
         public int SellValue => sellValue;
 
         public bool isEquipped() => equipped;

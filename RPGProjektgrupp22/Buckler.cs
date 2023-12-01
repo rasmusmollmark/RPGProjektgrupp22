@@ -8,7 +8,7 @@ namespace RPGProjektgrupp22
 {
     public class Buckler : Shield
     {
-        public Buckler() : base(new Random().Next(1, 8)+10, new Random().Next(10, 25)+10, "Buckler")
+        public Buckler() : base(new Random().Next(1, 8) + 10, new Random().Next(10, 25) + 10, "Buckler")
         {
         }
     }

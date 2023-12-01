@@ -9,7 +9,7 @@ namespace RPGProjektgrupp22
     public class Helmet : Equipable
     {
         private int defense;
-        public Helmet(int defense, string type) : base(defense/4, type)
+        public Helmet(int defense, string type) : base(defense / 4, type)
         {
             this.defense = defense;
         }

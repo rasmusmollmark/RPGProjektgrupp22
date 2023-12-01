@@ -10,21 +10,21 @@ namespace RPGProjektgrupp22
 {
     internal class Dungeon
     {
-        private List<string> dungeonNameList = new List<string>() { "Ice Dungeon", "Fire Dungeon", "Noob Dungeon", "Water dungeon"};
+        private List<string> dungeonNameList = new List<string>() { "Ice Dungeon", "Fire Dungeon", "Noob Dungeon", "Water dungeon" };
         private Random rnd = new Random();
         private int dungeonsCleared = 0;
         private int dungeonIndex;
         private bool explored = false;
-        public bool Explored 
+        public bool Explored
         {
             get { return explored; }
         }
         public Dungeon(int i)
         {
             dungeonIndex = i;
-            
-        } 
-        public bool Explore (Player player)
+
+        }
+        public bool Explore(Player player)
         {
             int randomOutcome = rnd.Next(1, 10);
             if (explored)
@@ -32,7 +32,7 @@ namespace RPGProjektgrupp22
                 Console.WriteLine("This dungeon has already been explored");
                 return false;
             }
-            else if (randomOutcome < 6) 
+            else if (randomOutcome < 6)
             {
                 Console.WriteLine("You encounter an enemy");
                 EncounterEnemy(player);
@@ -41,7 +41,7 @@ namespace RPGProjektgrupp22
 
             else
             {
-                
+
                 FindChest(player);
                 //Console.WriteLine("You are in the" + dungeonNameList[dungeonIndex]);
             }
@@ -68,7 +68,7 @@ namespace RPGProjektgrupp22
         private void FindChest(Player player)
         {
             Loot loot = new ChestLoot();
-            Console.WriteLine("You found a chest containing "+ loot.Gold +" gold!");
+            Console.WriteLine("You found a chest containing " + loot.Gold + " gold!");
             player.RecieveLoot(loot);
             Console.WriteLine("Press any key to continue");
             Console.ReadKey();

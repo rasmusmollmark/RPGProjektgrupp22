@@ -17,10 +17,10 @@ namespace RPGProjektgrupp22
             this.type = type + " healing potion";
             this.price = price;
         }
-        public string ConsumableToString() => type + " heals "+hpHealed+" hp. Price: " + price;
+        public string ConsumableToString() => type + " heals " + hpHealed + " hp. Price: " + price;
 
         public int HPHealed => hpHealed;
         public int Price => price;
-        
+
     }
 }

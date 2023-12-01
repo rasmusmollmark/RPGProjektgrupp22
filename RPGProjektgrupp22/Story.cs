@@ -13,7 +13,7 @@ namespace RPGProjektgrupp22
         List<Dungeon> dungeons = new List<Dungeon>();
         bool haveSpokenWithAkara = false;
         bool haveSpokenWithCharsi = false;
-        public Story() 
+        public Story()
         {
             for (int i = 0; i < 4; i++)
             {
@@ -49,7 +49,7 @@ namespace RPGProjektgrupp22
             ClearWindow();
             while (true)
             {
-                
+
                 int dungeonChoice = GetPlayerDungeonChoice();
                 bool dungeonCompleted = dungeons[dungeonChoice].Explore(player);
 
@@ -109,7 +109,7 @@ namespace RPGProjektgrupp22
         private void MeetVendors()
         {
             Vendor vendor = AskWhichVendorToMeet();
-            if(vendor == null)
+            if (vendor == null)
             {
                 return;
             }
@@ -127,12 +127,13 @@ namespace RPGProjektgrupp22
                     case 2:
                         vendor.BuyItems(player);
                         break;
-                    case 3: 
+                    case 3:
                         vendor.TellGossip();
                         break;
                     case 4:
                         return;
-                    default: Console.WriteLine("Invalid input");
+                    default:
+                        Console.WriteLine("Invalid input");
                         break;
                 }
             }
@@ -140,7 +141,7 @@ namespace RPGProjektgrupp22
 
         private Vendor AskWhichVendorToMeet()
         {
-            while(true)
+            while (true)
             {
                 ClearWindow();
                 Console.WriteLine("Which vendor do you want to see?\n" +
@@ -214,7 +215,7 @@ namespace RPGProjektgrupp22
                 int input = GetUserInput();
                 if (input > 0 && input < 5)
                 {
-                    return input-1;
+                    return input - 1;
                 }
                 Console.WriteLine("\nWrong input!");
             }
@@ -227,7 +228,7 @@ namespace RPGProjektgrupp22
             // Display the name of the selected dungeon
             Console.WriteLine($"You have chosen to explore " + selectedDungeon.GetDungeonName());
             selectedDungeon.Explore(player);
-            
+
 
         }
 
@@ -248,9 +249,9 @@ namespace RPGProjektgrupp22
                 "You will choose one of the provided dungeons and explore it. If you survive you will have the opportunity to go back to town.\n" +
                 "In town you will be able to sell your loot and buy equipment and or consumables such as health potions.\n" +
                 "\nPress any key when ready: ");
-            
+
             Console.ReadKey();
-               
+
         }
     }
 }
