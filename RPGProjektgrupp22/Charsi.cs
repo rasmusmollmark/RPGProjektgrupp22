@@ -113,7 +113,7 @@ namespace RPGProjektgrupp22
                 
                 Console.WriteLine(inventory.InventoryToString());
                 Console.WriteLine(player.Gold + " gold\nPlease input the number of the item you would like to buy: (press 0 to exit vendor)");
-                if (int.TryParse(Console.ReadLine(), out int input) && input > 0 && input < 6)
+                if (int.TryParse(Console.ReadLine(), out int input) && input > 0 && input <= inventory.equipables.Count)
                 {
                     Equipable equipable = inventory.equipables[input - 1];
                     if (PlayerHasEnoughGold(player, equipable))

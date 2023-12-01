@@ -11,7 +11,7 @@ namespace RPGProjektgrupp22
 
         private int levelsCompletedThisStage = 0;
         private int levelsCompletedTotal = 0;
-        private int gold = 10;
+        private int gold = 100;
         private int xp = 0;
         private int xpToNextLevel = 20;
         private int level = 1;
