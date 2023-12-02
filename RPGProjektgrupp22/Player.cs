@@ -8,25 +8,21 @@ namespace RPGProjektgrupp22
 {
     public class Player : Character
     {
-
         private int levelsCompletedThisStage = 0;
-        private int levelsCompletedTotal = 0;
         private int gold = 100;
         private int xp = 0;
         private int xpToNextLevel = 20;
         private int level = 1;
-
         private Inventory inventory;
-
 
         public Player(string name) : base(name, 100, 20, 20, 15, 10)
         {
             inventory = new Inventory();
         }
 
+        public int Gold { set => gold = value; get => gold; }
 
-
-        public void RecieveLoot(Loot loot, int xpGiven)
+        public void ReceiveLoot(Loot loot, int xpGiven)
         {
             gold += loot.Gold;
             inventory.AddItemToList(loot.Item);
@@ -35,8 +31,9 @@ namespace RPGProjektgrupp22
             CheckIfLevelUp();
         }
 
-        public void RecieveBoughtConsumable(Consumable consumable) => inventory.AddConsumableToList(consumable);
-        public void RecieveBoughtEquippable(Equipable equipable) => inventory.AddItemToList(equipable);
+        public void ReceiveBoughtConsumable(Consumable consumable) => inventory.AddConsumableToList(consumable);
+
+        public void ReceiveBoughtEquippable(Equipable equipable) => inventory.AddItemToList(equipable);
 
         private void CheckIfLevelUp()
         {
@@ -61,20 +58,7 @@ namespace RPGProjektgrupp22
                 "Xp needed for next level: (" + xp + "/" + xpToNextLevel + ")");
         }
 
-        public void RecieveLoot(Loot loot)
-        {
-            gold += loot.Gold;
-        }
-
-        public int Gold { set => gold = value; get => gold; }
-
-        public void LevelCompleted()
-        {
-            levelsCompletedThisStage++;
-            levelsCompletedTotal++;
-            damage++;
-            Health += 2;
-        }
+        public void ReceiveLoot(Loot loot) => gold += loot.Gold;
 
         public int GetLevelsCompleted() => levelsCompletedThisStage;
 
@@ -96,7 +80,6 @@ namespace RPGProjektgrupp22
 
         public override int GetDefense() => defense + inventory.GetAllAdditionalDefense();
 
-
         public bool DoesPlayerBlock() => new Random().Next(1, 101) <= inventory.GetBlockChance();
 
         public void PrintSellInventory(List<Equipable> sellList) => Console.WriteLine(inventory.SellItemsInventoryToString(sellList));
@@ -104,7 +87,5 @@ namespace RPGProjektgrupp22
         public List<Equipable> GetSellList() => inventory.GetPlayerSellList();
 
         public void RemoveItemFromInventory(Equipable equipable) => inventory.RemoveItem(equipable);
-
     }
-
 }

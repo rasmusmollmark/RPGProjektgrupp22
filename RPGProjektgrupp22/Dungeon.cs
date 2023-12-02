@@ -69,7 +69,7 @@ namespace RPGProjektgrupp22
         {
             Loot loot = new ChestLoot();
             Console.WriteLine("You found a chest containing " + loot.Gold + " gold!");
-            player.RecieveLoot(loot);
+            player.ReceiveLoot(loot);
             Console.WriteLine("Press any key to continue");
             Console.ReadKey();
         }

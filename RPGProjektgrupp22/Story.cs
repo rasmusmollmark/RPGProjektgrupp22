@@ -15,14 +15,18 @@ namespace RPGProjektgrupp22
         bool haveSpokenWithCharsi = false;
         public Story()
         {
+            CreateDungeons();
+            player = new Player(getPlayerName());
+            printStartOfGame();
+            ContinueStory();
+        }
+
+        private void CreateDungeons()
+        {
             for (int i = 0; i < 4; i++)
             {
                 dungeons.Add(new Dungeon(i));
             }
-            player = new Player(getPlayerName());
-            printStartOfGame();
-            ContinueStory();
-
         }
 
         private void ContinueStory()
@@ -41,7 +45,6 @@ namespace RPGProjektgrupp22
                     PlayerWantsToExploreDungeon();
                 }
             }
-
         }
 
         private void PlayerWantsToExploreDungeon()
@@ -49,7 +52,6 @@ namespace RPGProjektgrupp22
             ClearWindow();
             while (true)
             {
-
                 int dungeonChoice = GetPlayerDungeonChoice();
                 bool dungeonCompleted = dungeons[dungeonChoice].Explore(player);
 
@@ -162,7 +164,6 @@ namespace RPGProjektgrupp22
                                 haveSpokenWithAkara = true;
                             }
                             return new Akara();
-
                         case 2:
                             if (!haveSpokenWithCharsi)
                             {
@@ -176,14 +177,10 @@ namespace RPGProjektgrupp22
                     }
                 }
                 Console.WriteLine("Wrong input!");
-
             }
         }
 
-        private void ClearWindow()
-        {
-            Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-        }
+        private void ClearWindow() => Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
         private bool PlayerWantsToVisitTown()
         {
@@ -195,13 +192,7 @@ namespace RPGProjektgrupp22
                 int input = GetUserInput();
                 if (input < 3 && input > 0)
                 {
-                    switch (input)
-                    {
-                        case 1:
-                            return true;
-                        case 2:
-                            return false;
-                    }
+                    return input == 1;
                 }
                 Console.WriteLine("Wrong input!");
             }
@@ -219,17 +210,6 @@ namespace RPGProjektgrupp22
                 }
                 Console.WriteLine("\nWrong input!");
             }
-
-        }
-        private void ExploreDungeon(int dungeonIndex)
-        {
-            Dungeon selectedDungeon = dungeons[dungeonIndex];
-
-            // Display the name of the selected dungeon
-            Console.WriteLine($"You have chosen to explore " + selectedDungeon.GetDungeonName());
-            selectedDungeon.Explore(player);
-
-
         }
 
         private string getPlayerName()
@@ -238,20 +218,13 @@ namespace RPGProjektgrupp22
             return Console.ReadLine();
         }
 
-        private void printCurrentLocation(string location)
-        {
-
-        }
-
         private void printStartOfGame()
         {
             Console.WriteLine("This is an rpg based game where you will face different challanges by exploring a collection of dungeons.\n" +
                 "You will choose one of the provided dungeons and explore it. If you survive you will have the opportunity to go back to town.\n" +
                 "In town you will be able to sell your loot and buy equipment and or consumables such as health potions.\n" +
                 "\nPress any key when ready: ");
-
             Console.ReadKey();
-
         }
     }
 }

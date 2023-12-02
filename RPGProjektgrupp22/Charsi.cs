@@ -23,8 +23,8 @@ namespace RPGProjektgrupp22
                 "They came back to us true veterans, bearing some really powerful items. Seems like their victory was short-lived, though...\n" +
                 "Most of them are now corrupted by  Andariel.";
             string gossip = "Akara, our priestess and seer, is most upset by the corruption of our Sisters. I fear that she blames herself.";
-            Lore.Add(welcome);
-            Lore.Add(gossip);
+            lore.Add(welcome);
+            lore.Add(gossip);
             differentTypesOfGreetings = new string[] {"Farewell.",
 "Goodbye.",
 "Good day.",
@@ -56,7 +56,7 @@ namespace RPGProjektgrupp22
                     Equipable equipable = inventory.equipables[input - 1];
                     if (PlayerHasEnoughGold(player, equipable.Price))
                     {
-                        player.RecieveBoughtEquippable(equipable);
+                        player.ReceiveBoughtEquippable(equipable);
                         player.Gold -= equipable.Price;
                         RemoveItemFromInventory(equipable);
                         Console.WriteLine("Item purchased successfully!\nItem bought: " + equipable.EquipableToString() + "\nCurrent balance: " + player.Gold);

@@ -26,12 +26,12 @@ namespace RPGProjektgrupp22
                 "Now the last defenders of the Sisterhood are either dead or scattered throughout the wilderness." +
                 "\nI implore you, stranger. Please help us. Find a way to lift this terrible curse and \n" +
                 "we will pledge our loyalty to you for all time.";
-            Lore.Add(welcome);
+            lore.Add(welcome);
 
             string gossipAboutCharsi = " Charsi is young and innocent. However, I believe her Barbarian blood thrills to the \n" +
                 "prospect of adventure and danger. She takes great Pride in her work and finds comfort in the fact that her \n" +
                 "weapons and armor are helping to end this evil Plague.";
-            Lore.Add(gossipAboutCharsi);
+            lore.Add(gossipAboutCharsi);
             differentTypesOfGreetings = new string[] {"Good day.",
 "Good evening.",
 "Good morning.",
@@ -60,7 +60,7 @@ namespace RPGProjektgrupp22
                     Consumable consumable = inventory.consumables[input - 1];
                     if (PlayerHasEnoughGold(player, consumable.Price))
                     {
-                        player.RecieveBoughtConsumable(consumable);
+                        player.ReceiveBoughtConsumable(consumable);
                         player.Gold -= consumable.Price;
                         RemoveConsumableFromInventory(consumable);
                         Console.WriteLine("Consumable purchased successfully!\nItem bought: " + consumable.ConsumableToString() + "\nCurrent balance: " + player.Gold);

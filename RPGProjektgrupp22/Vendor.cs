@@ -10,12 +10,8 @@ namespace RPGProjektgrupp22
     {
         protected string name;
         protected VendorInventory inventory;
-        protected List<string> Lore = new List<string>();
+        protected List<string> lore = new List<string>();
         protected string[] differentTypesOfGreetings;
-
-
-        public string InventoryToString() => inventory.InventoryToString();
-
 
         public abstract void AddLore();
 
@@ -23,9 +19,9 @@ namespace RPGProjektgrupp22
 
         public void TellGossip()
         {
-            for (int i = 0; i < Lore[1].Length; i++)
+            for (int i = 0; i < lore[1].Length; i++)
             {
-                Console.Write(Lore[1][i]);
+                Console.Write(lore[1][i]);
                 Thread.Sleep(10);
                 if (Console.KeyAvailable)
                 {
@@ -38,9 +34,9 @@ namespace RPGProjektgrupp22
 
         public void TellWelcome()
         {
-            for (int i = 0; i < Lore[0].Length; i++)
+            for (int i = 0; i < lore[0].Length; i++)
             {
-                Console.Write(Lore[0][i]);
+                Console.Write(lore[0][i]);
                 Thread.Sleep(10);
                 if (Console.KeyAvailable)
                 {
@@ -51,19 +47,12 @@ namespace RPGProjektgrupp22
             Console.WriteLine();
         }
 
-        public void GreetPlayer()
-        {
-            Console.WriteLine(differentTypesOfGreetings[new Random().Next(1, differentTypesOfGreetings.Length)]);
-        }
+        public void GreetPlayer() => Console.WriteLine(differentTypesOfGreetings[new Random().Next(1, differentTypesOfGreetings.Length)]);
 
-        public void OptionForPlayerMeeting()
-        {
-            Console.WriteLine("1. Sell items\n" +
+        public void OptionForPlayerMeeting() => Console.WriteLine("1. Sell items\n" +
             "2. Buy items\n" +
             "3. Hear stories\n" +
             "4. Back to town");
-
-        }
 
         public void SellItems(Player player)
         {
@@ -91,14 +80,6 @@ namespace RPGProjektgrupp22
 
         protected bool PlayerHasEnoughGold(Player player, int price) => player.Gold >= price;
 
-
         public abstract void BuyItems(Player player);
-
-
-
-
-
-
-
     }
 }
