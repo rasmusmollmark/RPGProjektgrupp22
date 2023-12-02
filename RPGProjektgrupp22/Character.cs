@@ -17,12 +17,7 @@ namespace RPGProjektgrupp22
         protected int speed; // Ett fält som representerar hastighet
         protected int damage; //Ett fält som representerar skada
         protected bool isDead = false; // Ett fält som representerar om karaktären är död eller inte
-        public Character(string name, int health, int damage)
-        {
-            this.name = name;
-            this.health = health;
-            this.damage = damage;
-        }
+        
         public Character(string name, int maxHealth, int strength, int defense, int damage, int speed)
         {
             this.name = name;
@@ -33,8 +28,6 @@ namespace RPGProjektgrupp22
             this.damage = damage;
             this.speed = speed;
         }
-
-        public bool IsDead => isDead;
 
         protected int Health
         {
@@ -77,13 +70,6 @@ namespace RPGProjektgrupp22
                 isDead = true; // Sätt isDead till true
             }
         }
-
-
-        public void AttackCharacter(Character character) // En metod som attackerar en annan karaktär
-        {
-            character.TakeDamage(strength); // Anropa TakeDamage metoden på den andra karaktären med styrka som argument
-        }
-
     }
 }
 

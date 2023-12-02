@@ -8,7 +8,7 @@ namespace RPGProjektgrupp22
 {
     public class Weapon : Equipable
     {
-        protected int damageModifier;
+        private int damageModifier;
 
         public Weapon(int damageModifier, int sellValue, string type) : base(sellValue, type)
         {

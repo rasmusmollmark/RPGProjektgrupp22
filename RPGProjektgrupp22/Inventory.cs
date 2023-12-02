@@ -19,7 +19,6 @@ namespace RPGProjektgrupp22
         private Equipable helm;
         private Equipable chestArmor;
 
-
         public Inventory()
         {
             EquipStarterItems();
@@ -42,6 +41,8 @@ namespace RPGProjektgrupp22
             secondHand = new StarterShield();
             firstHand.Equip();
             secondHand.Equip();
+            helm = new NotEquipped();
+            chestArmor = new NotEquipped();
         }
 
         public void RemoveItem(Equipable item)
@@ -55,18 +56,17 @@ namespace RPGProjektgrupp22
                 switch (item)
                 {
                     case Weapon sword:
-                        firstHand = null;
+                        firstHand = new NotEquipped();
                         break;
                     case Shield shield:
-                        secondHand = null;
+                        secondHand = new NotEquipped();
                         break;
                     case Helmet helmet:
-                        helm = null;
+                        helm = new NotEquipped();
                         break;
                     case ChestArmor armor:
-                        chestArmor = null;
+                        chestArmor = new NotEquipped();
                         break;
-
                 }
             }
         }
@@ -105,45 +105,20 @@ namespace RPGProjektgrupp22
             {
                 result.Add(item);
             }
-            if (firstHand != null)
-            {
-                result.Add(firstHand);
-            }
-            if (secondHand != null)
-            {
-                result.Add(secondHand);
-            }
-            if (helm != null)
-            {
-                result.Add(helm);
-            }
-            if (chestArmor != null)
-            {
-                result.Add(chestArmor);
-            }
+            result.Add(firstHand);
+            result.Add(secondHand);
+            result.Add(helm);
+            result.Add(chestArmor);
             return result;
-
         }
 
         private string EquippedItemsToString()
         {
             string result = "";
-            if (firstHand != null)
-            {
-                result += firstHand.EquipableToString() + "\n";
-            }
-            if (secondHand != null)
-            {
-                result += secondHand.EquipableToString() + "\n";
-            }
-            if (helm != null)
-            {
-                result += helm.EquipableToString() + "\n";
-            }
-            if (chestArmor != null)
-            {
-                result += chestArmor.EquipableToString() + "\n";
-            }
+            result += firstHand.EquipableToString() + "\n";
+            result += secondHand.EquipableToString() + "\n";
+            result += helm.EquipableToString() + "\n";
+            result += chestArmor.EquipableToString() + "\n";
             return result;
         }
 
@@ -193,7 +168,6 @@ namespace RPGProjektgrupp22
                 }
             }
             return playerHealth;
-
         }
 
         private int Consume(int index)
@@ -232,7 +206,7 @@ namespace RPGProjektgrupp22
         }
         private void Equip(int index, Equipable equipped, Equipable toBeEquipped)
         {
-            if (equipped != null)
+            if (equipped.isEquipped())
             {
                 itemsInventoryList[index] = equipped;
                 equipped.UnEquip();
@@ -243,39 +217,16 @@ namespace RPGProjektgrupp22
             }
         }
 
-        public int GetDamageModifier()
-        {
-            if (firstHand != null)
-            {
-                return (firstHand as Weapon).DamageModifier;
-            }
-            return 0;
-        }
+        public int GetDamageModifier() => firstHand.isEquipped() ? (firstHand as Weapon).DamageModifier : 0;
 
-        public int GetBlockChance()
-        {
-            if (secondHand != null)
-            {
-                return (secondHand as Shield).BlockChance;
-            }
-            return 0;
-        }
+        public int GetBlockChance() => secondHand.isEquipped() ? (secondHand as Shield).BlockChance : 0;
 
         internal int GetAllAdditionalDefense()
         {
             int result = 0;
-            if (chestArmor != null)
-            {
-                result += (chestArmor as ChestArmor).Defense;
-            }
-            if (helm != null)
-            {
-                result += (helm as Helmet).Defense;
-            }
-            if (secondHand != null)
-            {
-                result += (secondHand as Shield).Defense;
-            }
+            result += chestArmor.isEquipped() ? (chestArmor as ChestArmor).Defense : 0;
+            result += helm.isEquipped() ? (helm as Helmet).Defense : 0;
+            result += secondHand.isEquipped() ? (secondHand as Shield).Defense : 0;
             return result;
         }
 

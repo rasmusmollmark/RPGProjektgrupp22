@@ -220,7 +220,7 @@ namespace RPGProjektgrupp22
 
         private void printStartOfGame()
         {
-            Console.WriteLine("This is an rpg based game where you will face different challanges by exploring a collection of dungeons.\n" +
+            Console.WriteLine("This is an rpg based game where you will face different challenges by exploring a collection of dungeons.\n" +
                 "You will choose one of the provided dungeons and explore it. If you survive you will have the opportunity to go back to town.\n" +
                 "In town you will be able to sell your loot and buy equipment and or consumables such as health potions.\n" +
                 "\nPress any key when ready: ");

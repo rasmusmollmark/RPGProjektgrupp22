@@ -18,17 +18,16 @@ namespace RPGProjektgrupp22
 
         public override void AddLore()
         {
-            string welcome = "I am  Akara, High Priestess of the Sisterhood of the Sightless Eye.\n" +
+            string welcome = "I am Akara, High Priestess of the Sisterhood of the Sightless Eye.\n" +
                 "I welcome you, traveler, to our camp, but I'm afraid I can offer you but poor shelter within these rickety walls." +
-                "\nYou see, our ancient Sisterhood has  Fallen under a strange curse. The mighty Citadel from which we have \n" +
+                "\nYou see, our ancient Sisterhood has Fallen under a strange curse. The mighty Citadel from which we have \n" +
                 "guarded the gates to the East for generations, has been corrupted by the evil Demoness, Andariel.\n" +
                 "I still can't believe it... but she turned many of our sister Rogues against us and drove us from our ancestral home.\n" +
                 "Now the last defenders of the Sisterhood are either dead or scattered throughout the wilderness." +
                 "\nI implore you, stranger. Please help us. Find a way to lift this terrible curse and \n" +
                 "we will pledge our loyalty to you for all time.";
             lore.Add(welcome);
-
-            string gossipAboutCharsi = " Charsi is young and innocent. However, I believe her Barbarian blood thrills to the \n" +
+            string gossipAboutCharsi = "Charsi is young and innocent. However, I believe her Barbarian blood thrills to the \n" +
                 "prospect of adventure and danger. She takes great Pride in her work and finds comfort in the fact that her \n" +
                 "weapons and armor are helping to end this evil Plague.";
             lore.Add(gossipAboutCharsi);
@@ -40,7 +39,6 @@ namespace RPGProjektgrupp22
 "The Order welcomes you.",
 "Welcome back, my friend. We are still clearing the monastery, but you're welcome to stay here as long as you need.",
 "Yes?"};
-
         }
 
         public override void GenerateInventory()
