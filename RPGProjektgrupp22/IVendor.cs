@@ -6,22 +6,24 @@ using System.Threading.Tasks;
 
 namespace RPGProjektgrupp22
 {
-    public abstract class Vendor
+    public interface IVendor
     {
-        protected string name;
-        protected VendorInventory inventory;
-        protected List<string> lore = new List<string>();
-        protected string[] differentTypesOfGreetings;
+        protected VendorInventory Inventory { get; }
+        protected List<string> Lore {get;}
+        protected string[] DifferentTypesOfGreetings { get; }
 
-        public abstract void AddLore();
+        public void AddLore();
 
-        public abstract void GenerateInventory();
+        public void GenerateInventory();
 
+        // 1: Här används Default Interface Methods
+        // 2: Det görs genom att alla klasser som implementerar gränssnittet har tillgång till dessa metoder
+        // 3: Det görs för att återanvända kod, slippa ha samma kod flera gånger
         public void TellGossip()
         {
-            for (int i = 0; i < lore[1].Length; i++)
+            for (int i = 0; i < Lore[1].Length; i++)
             {
-                Console.Write(lore[1][i]);
+                Console.Write(Lore[1][i]);
                 Thread.Sleep(10);
                 if (Console.KeyAvailable)
                 {
@@ -34,9 +36,9 @@ namespace RPGProjektgrupp22
 
         public void TellWelcome()
         {
-            for (int i = 0; i < lore[0].Length; i++)
+            for (int i = 0; i < Lore[0].Length; i++)
             {
-                Console.Write(lore[0][i]);
+                Console.Write(Lore[0][i]);
                 Thread.Sleep(10);
                 if (Console.KeyAvailable)
                 {
@@ -47,7 +49,7 @@ namespace RPGProjektgrupp22
             Console.WriteLine();
         }
 
-        public void GreetPlayer() => Console.WriteLine(differentTypesOfGreetings[new Random().Next(1, differentTypesOfGreetings.Length)]);
+        public void GreetPlayer() => Console.WriteLine(DifferentTypesOfGreetings[new Random().Next(1, DifferentTypesOfGreetings.Length)]);
 
         public void OptionForPlayerMeeting() => Console.WriteLine("1. Sell items\n" +
             "2. Buy items\n" +
@@ -78,8 +80,8 @@ namespace RPGProjektgrupp22
             }
         }
 
-        protected bool PlayerHasEnoughGold(Player player, int price) => player.Gold >= price;
+        public bool PlayerHasEnoughGold(Player player, int price) => player.Gold >= price;
 
-        public abstract void BuyItems(Player player);
+        public void BuyItems(Player player);
     }
 }

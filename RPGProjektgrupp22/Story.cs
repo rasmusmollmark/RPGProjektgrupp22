@@ -110,7 +110,7 @@ namespace RPGProjektgrupp22
 
         private void MeetVendors()
         {
-            Vendor vendor = AskWhichVendorToMeet();
+            IVendor vendor = AskWhichVendorToMeet();
             if (vendor == null)
             {
                 return;
@@ -141,7 +141,7 @@ namespace RPGProjektgrupp22
             }
         }
 
-        private Vendor AskWhichVendorToMeet()
+        private IVendor AskWhichVendorToMeet()
         {
             while (true)
             {
@@ -159,7 +159,7 @@ namespace RPGProjektgrupp22
                             if (!haveSpokenWithAkara)
                             {
                                 ClearWindow();
-                                Vendor akara = new Akara();
+                                IVendor akara = new Akara();
                                 akara.TellWelcome();
                                 haveSpokenWithAkara = true;
                             }
@@ -168,7 +168,7 @@ namespace RPGProjektgrupp22
                             if (!haveSpokenWithCharsi)
                             {
                                 ClearWindow();
-                                Vendor charsi = new Charsi();
+                                IVendor charsi = new Charsi();
                                 charsi.TellWelcome();
                                 haveSpokenWithCharsi = true;
                             }

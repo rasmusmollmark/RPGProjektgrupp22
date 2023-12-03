@@ -12,7 +12,7 @@ namespace RPGProjektgrupp22
     public class Inventory
     {
         private List<Equipable> itemsInventoryList = new List<Equipable>();
-        private List<Consumable> consumablesList = new List<Consumable>();
+        private List<IConsumable> consumablesList = new List<IConsumable>();
 
         private Equipable firstHand;
         private Equipable secondHand;
@@ -33,7 +33,7 @@ namespace RPGProjektgrupp22
             }
         }
 
-        public void AddConsumableToList(Consumable consumable) => consumablesList.Add(consumable);
+        public void AddConsumableToList(IConsumable consumable) => consumablesList.Add(consumable);
 
         private void EquipStarterItems()
         {
@@ -81,7 +81,7 @@ namespace RPGProjektgrupp22
                 result += item.EquipableToString() + "\n";
             }
             result += "\nConsumables: \n";
-            foreach (Consumable consumable in consumablesList)
+            foreach (IConsumable consumable in consumablesList)
             {
                 result += consumable.ConsumableToString() + "\n";
             }
@@ -172,11 +172,15 @@ namespace RPGProjektgrupp22
 
         private int Consume(int index)
         {
-            int hpHealed = (consumablesList[index] as HealingPotion).HPHealed;
+            int hpHealed = (consumablesList[index] as HealingPotion).HpHealed;
             consumablesList.Remove(consumablesList[index]);
             return hpHealed;
         }
 
+        // 1: Här används overloading av instansmetoder
+        // 2: Det används genom att ha två metoder med samma namn men olika parametrar/returtyper (här bara parametrar)
+        // 3: Det används för att metoderna används tillsammans och anropas endast då spelaren ska utrustas med ett specifikt föremål på rätt plats.
+        // Alltså är det en metodkedja där det först bestäms vilken sorts föremål som ska utrusta, sen anropas den andra metoden.
         private void Equip(int index)
         {
             switch (itemsInventoryList[index])
@@ -206,7 +210,7 @@ namespace RPGProjektgrupp22
         }
         private void Equip(int index, Equipable equipped, Equipable toBeEquipped)
         {
-            if (equipped.isEquipped())
+            if (equipped.IsEquipped)
             {
                 itemsInventoryList[index] = equipped;
                 equipped.UnEquip();
@@ -217,16 +221,16 @@ namespace RPGProjektgrupp22
             }
         }
 
-        public int GetDamageModifier() => firstHand.isEquipped() ? (firstHand as Weapon).DamageModifier : 0;
+        public int GetDamageModifier() => firstHand.IsEquipped ? (firstHand as Weapon).DamageModifier : 0;
 
-        public int GetBlockChance() => secondHand.isEquipped() ? (secondHand as Shield).BlockChance : 0;
+        public int GetBlockChance() => secondHand.IsEquipped ? (secondHand as Shield).BlockChance : 0;
 
         internal int GetAllAdditionalDefense()
         {
             int result = 0;
-            result += chestArmor.isEquipped() ? (chestArmor as ChestArmor).Defense : 0;
-            result += helm.isEquipped() ? (helm as Helmet).Defense : 0;
-            result += secondHand.isEquipped() ? (secondHand as Shield).Defense : 0;
+            result += chestArmor.IsEquipped ? (chestArmor as ChestArmor).Defense : 0;
+            result += helm.IsEquipped ? (helm as Helmet).Defense : 0;
+            result += secondHand.IsEquipped ? (secondHand as Shield).Defense : 0;
             return result;
         }
 

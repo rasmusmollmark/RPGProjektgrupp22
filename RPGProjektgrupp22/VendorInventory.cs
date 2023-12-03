@@ -8,7 +8,7 @@ namespace RPGProjektgrupp22
 {
     public class VendorInventory
     {
-        public List<Consumable> consumables = new List<Consumable>();
+        public List<IConsumable> consumables = new List<IConsumable>();
         public List<Equipable> equipables = new List<Equipable>();
         
         public VendorInventory(int amountOfHealingPotions)

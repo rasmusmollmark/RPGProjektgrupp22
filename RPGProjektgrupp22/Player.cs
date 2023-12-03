@@ -8,11 +8,19 @@ namespace RPGProjektgrupp22
 {
     public class Player : Character
     {
+        // 1: Här används inkapsling/informationsgömning
+        // 2: Det används genom att fälten är privata och kan inte förändras eller tittas på utanför klassen utan att anropa olika metoder
+        // 3: Det används för att göra det omöjligt för oss som kodare att råka förändra fälten utanför klassen.
+        // Förklaras också lättare vad som vill göras med fältet i namnet på metoden.
         private int levelsCompletedThisStage = 0;
         private int gold = 100;
         private int xp = 0;
         private int xpToNextLevel = 20;
         private int level = 1;
+
+        // 1: Här används objektkomposition
+        // 2: Det används genom att Player har en has-a relation till inventory
+        // 3: Det används för att samla alla objekt som spelaren kan ha i sitt "lager" på ett ställe samt utnyttja dessa objekt genom metoderna som finns i klassen
         private Inventory inventory;
 
         public Player(string name) : base(name, 100, 20, 20, 15, 10)
@@ -31,7 +39,7 @@ namespace RPGProjektgrupp22
             CheckIfLevelUp();
         }
 
-        public void ReceiveBoughtConsumable(Consumable consumable) => inventory.AddConsumableToList(consumable);
+        public void ReceiveBoughtConsumable(IConsumable consumable) => inventory.AddConsumableToList(consumable);
 
         public void ReceiveBoughtEquippable(Equipable equipable) => inventory.AddItemToList(equipable);
 

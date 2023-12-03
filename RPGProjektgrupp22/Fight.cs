@@ -9,10 +9,11 @@ namespace RPGProjektgrupp22
 {
     internal class Fight
     {
+        // 1: Här används konceptet beroendeinjektion
+        // 2: Det görs genom att enemy-fältet tilldelas ett enemy-objekt i konstruktorn
+        // 3: Det görs för att spara och hålla koll på objektets data genom hela fighten 
         private Enemy enemy; // The enemy you encounter in the fight
-        private Player player;
         private Random rnd = new Random(); // A random object for generating random numbers
-
         public Fight(Enemy enemy, Dungeon dungeon)
         {
             this.enemy = enemy; // Assign the enemy parameter to the enemy field

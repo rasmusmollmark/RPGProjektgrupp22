@@ -7,16 +7,22 @@ using System.Xml.Linq;
 
 namespace RPGProjektgrupp22
 {
-    public class Akara : Vendor
+    public class Akara : IVendor
     {
+        private VendorInventory inventory;
+        private List<string> lore = new List<string>();
+        private string[] differentTypesOfGreetings;
+        public VendorInventory Inventory { get => inventory; }
+        public List<string> Lore { get => lore; }
+        public string[] DifferentTypesOfGreetings { get => differentTypesOfGreetings; }
+
         public Akara()
         {
-            name = "Akara";
             GenerateInventory();
             AddLore();
         }
 
-        public override void AddLore()
+        public void AddLore()
         {
             string welcome = "I am Akara, High Priestess of the Sisterhood of the Sightless Eye.\n" +
                 "I welcome you, traveler, to our camp, but I'm afraid I can offer you but poor shelter within these rickety walls." +
@@ -41,13 +47,13 @@ namespace RPGProjektgrupp22
 "Yes?"};
         }
 
-        public override void GenerateInventory()
+        public void GenerateInventory()
         {
             inventory = new VendorInventory(new Random().Next(4, 7));
         }
 
 
-        public override void BuyItems(Player player)
+        public void BuyItems(Player player)
         {
             while (true)
             {
@@ -55,8 +61,8 @@ namespace RPGProjektgrupp22
                 Console.WriteLine(player.Gold + " gold\nPlease input the number of the item you would like to buy: (press 0 to exit vendor)");
                 if (int.TryParse(Console.ReadLine(), out int input) && input > 0 && input < 6)
                 {
-                    Consumable consumable = inventory.consumables[input - 1];
-                    if (PlayerHasEnoughGold(player, consumable.Price))
+                    IConsumable consumable = inventory.consumables[input - 1];
+                    if ((this as IVendor).PlayerHasEnoughGold(player, consumable.Price))
                     {
                         player.ReceiveBoughtConsumable(consumable);
                         player.Gold -= consumable.Price;
@@ -75,6 +81,6 @@ namespace RPGProjektgrupp22
                 }
             }
         }
-        private void RemoveConsumableFromInventory(Consumable consumable) => inventory.consumables.Remove(consumable);
+        private void RemoveConsumableFromInventory(IConsumable consumable) => inventory.consumables.Remove(consumable);
     }
 }

@@ -7,16 +7,22 @@ using System.Threading.Tasks;
 
 namespace RPGProjektgrupp22
 {
-    public class Charsi : Vendor
+    public class Charsi : IVendor
     {
+        private VendorInventory inventory;
+        private List<string> lore = new List<string>();
+        private string[] differentTypesOfGreetings;
+        public VendorInventory Inventory { get => inventory; }
+        public List<string> Lore { get => lore; }
+        public string[] DifferentTypesOfGreetings { get => differentTypesOfGreetings; }
+
         public Charsi()
         {
-            name = "Charsi";
             GenerateInventory();
             AddLore();
         }
 
-        public override void AddLore()
+        public void AddLore()
         {
             string welcome = "Hi there. I'm  Charsi, the blacksmith here in camp. It's good to see some strong adventurers around here.\n" +
                 "Many of our Sisters fought bravely against Diablo when he first attacked the town of  Tristram. \n" +
@@ -39,22 +45,21 @@ namespace RPGProjektgrupp22
 "What'cha need?"};
         }
 
-
-        public override void GenerateInventory()
+        public void GenerateInventory()
         {
             inventory = new VendorInventory();
         }
-        public override void BuyItems(Player player)
+
+        public void BuyItems(Player player)
         {
             while (true)
             {
-
                 Console.WriteLine(inventory.InventoryToString());
                 Console.WriteLine(player.Gold + " gold\nPlease input the number of the item you would like to buy: (press 0 to exit vendor)");
                 if (int.TryParse(Console.ReadLine(), out int input) && input > 0 && input <= inventory.equipables.Count)
                 {
                     Equipable equipable = inventory.equipables[input - 1];
-                    if (PlayerHasEnoughGold(player, equipable.Price))
+                    if ((this as IVendor).PlayerHasEnoughGold(player, equipable.Price))
                     {
                         player.ReceiveBoughtEquippable(equipable);
                         player.Gold -= equipable.Price;
@@ -75,6 +80,5 @@ namespace RPGProjektgrupp22
         }
 
         private void RemoveItemFromInventory(Equipable equipable) => inventory.equipables.Remove(equipable);
-
     }
 }

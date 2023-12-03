@@ -8,17 +8,13 @@ namespace RPGProjektgrupp22
 {
     public class Helmet : Equipable
     {
-        private int defense;
-        public Helmet(int defense, string type) : base(defense / 4, type)
+        public int Defense { get; private set; }
+        public Helmet(int defense, string type) : base(defense / 3, type)
         {
-            this.defense = defense;
+            Defense = defense;
         }
 
-        public override string EquipableToString() => type + " Defense: " + defense;
+        public override string EquipableToString() => type + " Defense: " + Defense;
 
-        public int Defense
-        {
-            get => defense;
-        }
     }
 }

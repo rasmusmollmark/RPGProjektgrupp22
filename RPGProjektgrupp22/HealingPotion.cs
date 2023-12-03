@@ -6,21 +6,18 @@ using System.Threading.Tasks;
 
 namespace RPGProjektgrupp22
 {
-    public class HealingPotion : Consumable
+    public class HealingPotion : IConsumable
     {
-        int hpHealed;
-        string type;
-        int price;
+        public int HpHealed { get; set; }
+        public int Price { get; set; }
+        public string Type { get; set; }
+        
         public HealingPotion(int hpHealed, string type, int price)
         {
-            this.hpHealed = hpHealed;
-            this.type = type + " healing potion";
-            this.price = price;
+            HpHealed = hpHealed;
+            Type = type + " healing potion";
+            Price = price;
         }
-        public string ConsumableToString() => type + " heals " + hpHealed + " hp. Price: " + price;
-
-        public int HPHealed => hpHealed;
-        public int Price => price;
-
+        public string ConsumableToString() => Type + " heals " + HpHealed + " hp. Price: " + Price;
     }
 }
