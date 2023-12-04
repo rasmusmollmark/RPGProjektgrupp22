@@ -19,7 +19,8 @@ namespace RPGProjektgrupp22
             enemies.Add(new Enemy("Orc", 80, 15, 10, 15, 15, 30, 15));
             enemies.Add(new Enemy("Ogre", 120, 20, 15, 20, 5, 50, 20));
         }
-        public Enemy(string name, int health, int damage, int expGiven, int goldGiven, int strenght, int defense, int speed) : base(name, health, strenght, defense, damage, speed) // En konstruktor som tar samma parametrar som Character klassen plus expGiven och goldGiven
+        public Enemy(string name, int health, int damage, int expGiven, int goldGiven, int strenght, int defense, int speed) : base(name, health, strenght, defense, damage, speed) // Här används konstruktorkedjning för att återanvända funktionalitet från Characther klassen
+                                                                                                                                                                                    //Med hjälp av :base hämtar vi information för egenskaper som är gemensamma från characther
         {
             this.expGiven = expGiven; // Tilldela expGiven till fältet
             this.goldGiven = goldGiven; // Tilldela goldGiven till fältet
@@ -31,7 +32,8 @@ namespace RPGProjektgrupp22
 
         public int GetGoldGiven() => goldGiven; // En metod som returnerar goldGiven
 
-        public override void TakeDamage(int damage) // En metod som överlagrar TakeDamage metoden från Character klassen
+        public override void TakeDamage(int damage) // En metod som överlagrar TakeDamage metoden från Character klassen/
+                                                    //Subtyps polymorfism används för att kalla på TakeDamage metoden från Characther för att sedan lägga till en informations rad
         {
             TakeDamage(damage); // Anropa bas klassens TakeDamage metod
             Console.WriteLine(name + " took " + damage + " damage!"); // Skriv ut ett meddelande om att fienden tog skada
